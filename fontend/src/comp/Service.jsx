@@ -12,7 +12,7 @@ function Service() {
                         data-aos-delay="200" >
                 <div className="bb-services-box">
                   <div className="services-img">
-                    <img src="/src/img/services/1.png" alt="services-1" />
+                    <img src="img/services/1.png" alt="services-1" />
                   </div>
                   <div className="services-contact">
                     <h4>Free Shipping</h4>
@@ -28,7 +28,7 @@ function Service() {
                         data-aos-delay="400">
                 <div className="bb-services-box">
                   <div className="services-img">
-                    <img src="/src/img/services/2.png" alt="services-2" />
+                    <img src="img/services/2.png" alt="services-2" />
                   </div>
                   <div className="services-contact">
                     <h4>24x7 Support</h4>
@@ -44,7 +44,7 @@ function Service() {
                         data-aos-delay="600">
                 <div className="bb-services-box">
                   <div className="services-img">
-                    <img src="/src/img/services/3.png" alt="services-3" />
+                    <img src="img/services/3.png" alt="services-3" />
                   </div>
                   <div className="services-contact">
                     <h4>30 Days Return</h4>
@@ -60,7 +60,7 @@ function Service() {
                         data-aos-delay="800" >
                 <div className="bb-services-box">
                   <div className="services-img">
-                    <img src="/src/img/services/4.png" alt="services-4" />
+                    <img src="img/services/4.png" alt="services-4" />
                   </div>
                   <div className="services-contact">
                     <h4>Payment Secure</h4>

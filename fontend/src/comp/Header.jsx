@@ -114,7 +114,7 @@ function Header() {
                         <div className="col-12">
                             <div className="inner-bottom-header">
                                 <div className="cols bb-logo-detail">
-                                    <div className="header-logo"><NavLink to="/"><img src="/src/img/logo-1.png" className="light" /></NavLink></div><a
+                                    <div className="header-logo"><NavLink to="/"><img src="img/logo-1.png" className="light" /></NavLink></div><a
                                         className="bb-sidebar-toggle bb-category-toggle" href="#"><svg className="svg-icon"
                                             viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
                                             <path
@@ -147,7 +147,7 @@ function Header() {
                                         </div>
                                     </div>
                                     <div className="cols bb-icons mob-stickey" ref={refs.mobHeader}>
-                                        <div className="header-logo"><NavLink to="/"><img src="/src/img/logo-1.png" className="light" /></NavLink></div>
+                                        <div className="header-logo"><NavLink to="/"><img src="img/logo-1.png" className="light" /></NavLink></div>
                                         <div className="bb-flex-justify">
                                             <div className="bb-header-buttons">
                                                 <div className="bb-acc-drop"><div

@@ -23,7 +23,7 @@ export const SideBar = ({ isOpen, ToggleSidebar }) => {
         <header>
             <div className="sidebar__toggle-container"> <label tabIndex="0" htmlFor="checkbox-input" id="label-for-checkbox-input" className="nav__toggle"> <span className="toggle--icons" onClick={ToggleSidebar}> <FontAwesomeIcon icon={ isOpen ? faBars : faCircleChevronLeft} />  </span> </label> </div>
             <div className="text-center">
-            <img className="codepen-logo" src="../src/img/logo.png" alt="" />
+            <img className="codepen-logo" src="img/logo.png" alt="" />
             </div>
         </header>
         <section className="sidebar__wrapper">

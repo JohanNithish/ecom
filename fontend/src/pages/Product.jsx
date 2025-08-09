@@ -15,7 +15,7 @@ const Product = () => {
   const [nav1, setNav1] = useState(null);
   const [nav2, setNav2] = useState(null);
 
-  const productImages = [1, 2, 3, 4, 5].map((i) => `/src/img/new-product/${i}.jpg`);
+  const productImages = [1, 2, 3, 4, 5].map((i) => `img/new-product/${i}.jpg`);
 
   const mainSliderSettings = {
     asNavFor: nav2,
@@ -39,8 +39,8 @@ const Product = () => {
   {
     id: 1,
     tag: "Hot",
-    img: "/src/img/product/2.jpg",
-    hoverImg: "/src/img/product/back-2.jpg",
+    img: "img/product/2.jpg",
+    hoverImg: "img/product/back-2.jpg",
     category: "Juice",
     title: "Organic Apple Juice Pack",
     newPrice: "$15",
@@ -50,8 +50,8 @@ const Product = () => {
   {
     id: 2,
     tag: "",
-    img: "/src/img/product/3.jpg",
-    hoverImg: "/src/img/product/back-3.jpg",
+    img: "img/product/3.jpg",
+    hoverImg: "img/product/back-3.jpg",
     category: "Juice",
     title: "Mixed Almond nuts juice Pack",
     newPrice: "$39",
@@ -61,8 +61,8 @@ const Product = () => {
   {
     id: 3,
     tag: "Sale",
-    img: "/src/img/product/4.jpg",
-    hoverImg: "/src/img/product/back-4.jpg",
+    img: "img/product/4.jpg",
+    hoverImg: "img/product/back-4.jpg",
     category: "Fruits",
     title: "Fresh Mango Slice Juice",
     newPrice: "$25",
@@ -72,8 +72,8 @@ const Product = () => {
   {
     id: 4,
     tag: "",
-    img: "/src/img/new-product/5.jpg",
-    hoverImg: "/src/img/new-product/back-5.jpg",
+    img: "img/new-product/5.jpg",
+    hoverImg: "img/new-product/back-5.jpg",
     category: "Spices",
     title: "Black Pepper Spice pack",
     newPrice: "$22",
@@ -83,8 +83,8 @@ const Product = () => {
   {
     id: 5,
     tag: "New",
-    img: "/src/img/product/1.jpg",
-    hoverImg: "/src/img/product/back-1.jpg",
+    img: "img/product/1.jpg",
+    hoverImg: "img/product/back-1.jpg",
     category: "Chocos",
     title: "Mixed Fruits Chocolates",
     newPrice: "$20",

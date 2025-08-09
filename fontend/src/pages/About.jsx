@@ -11,7 +11,7 @@ const About = () => {
   {
     name: 'Elena Wilson',
     role: 'Manager',
-    image: '/src/img/team/1.jpg',
+    image: 'img/team/1.jpg',
     social: {
       facebook: '#',
       twitter: '#',
@@ -21,7 +21,7 @@ const About = () => {
   {
     name: 'Mario Bisop',
     role: 'CEO',
-    image: '/src/img/team/2.jpg',
+    image: 'img/team/2.jpg',
     social: {
       facebook: '#',
       twitter: '#',
@@ -31,7 +31,7 @@ const About = () => {
   {
     name: 'Maria Margret',
     role: 'Co-Founder',
-    image: '/src/img/team/3.jpg',
+    image: 'img/team/3.jpg',
     social: {
       facebook: '#',
       twitter: '#',
@@ -41,7 +41,7 @@ const About = () => {
   {
     name: 'Juliat Hilson',
     role: 'Team Leader',
-    image: '/src/img/team/4.jpg',
+    image: 'img/team/4.jpg',
     social: {
       facebook: '#',
       twitter: '#',
@@ -70,7 +70,7 @@ const About = () => {
           {/* Left Column - Image */}
           <div className="col-12 col-lg-6 mb-24">
             <div className="bb-about-img">
-              <img src="/src/img/one.png" alt="about-one" />
+              <img src="img/one.png" alt="about-one" />
             </div>
           </div>
 

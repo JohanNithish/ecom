@@ -25,39 +25,39 @@ const categoryRef = useRef(null);
     {
       title: "Fruits",
       items: 291,
-      img: "/src/img/category/2.svg",
+      img: "img/category/2.svg",
     },
     {
       title: "Cold Drinks",
       items: 49,
-      img: "/src/img/category/3.svg",
+      img: "img/category/3.svg",
     },
     {
       title: "Bakery",
       items: 8,
-      img: "/src/img/category/4.svg",
+      img: "img/category/4.svg",
     },
     {
       title: "Fast Food",
       items: 291,
-      img: "/src/img/category/5.svg",
+      img: "img/category/5.svg",
     },
     {
       title: "Snacks",
       items: 49,
-      img: "/src/img/category/6.svg",
+      img: "img/category/6.svg",
     },
     {
       title: "Vegetables",
       items: 485,
-      img: "/src/img/category/1.svg",
+      img: "img/category/1.svg",
     },
   ];
 
   const deals = [
     {
-      img: '/src/img/product/3.jpg',
-      hoverImg: '/src/img/product/back-3.jpg',
+      img: 'img/product/3.jpg',
+      hoverImg: 'img/product/back-3.jpg',
       tag: '',
       category: 'Juice',
       title: 'Mixed Almond nuts juice Pack',
@@ -66,8 +66,8 @@ const categoryRef = useRef(null);
       quantity: '250 g',
     },
     {
-      img: '/src/img/product/4.jpg',
-      hoverImg: '/src/img/product/back-4.jpg',
+      img: 'img/product/4.jpg',
+      hoverImg: 'img/product/back-4.jpg',
       tag: 'Sale',
       category: 'Fruits',
       title: 'Fresh Mango Slice Juice',
@@ -76,8 +76,8 @@ const categoryRef = useRef(null);
       quantity: '100 ml',
     },
     {
-      img: '/src/img/new-product/5.jpg',
-      hoverImg: '/src/img/new-product/back-5.jpg',
+      img: 'img/new-product/5.jpg',
+      hoverImg: 'img/new-product/back-5.jpg',
       tag: '',
       category: 'Spices',
       title: 'Black Pepper Spice pack',
@@ -86,8 +86,8 @@ const categoryRef = useRef(null);
       quantity: '1 pack',
     },
     {
-      img: '/src/img/product/1.jpg',
-      hoverImg: '/src/img/product/back-1.jpg',
+      img: 'img/product/1.jpg',
+      hoverImg: 'img/product/back-1.jpg',
       tag: 'New',
       category: 'Chocos',
       title: 'Mixed Fruits Chocolates',
@@ -96,8 +96,8 @@ const categoryRef = useRef(null);
       quantity: '1 Pack',
     },
     {
-      img: '/src/img/product/2.jpg',
-      hoverImg: '/src/img/product/back-2.jpg',
+      img: 'img/product/2.jpg',
+      hoverImg: 'img/product/back-2.jpg',
       tag: 'Hot',
       category: 'Juice',
       title: 'Organic Apple Juice Pack',
@@ -116,8 +116,8 @@ const categoryRef = useRef(null);
       oldPrice: '$10',
       weight: '500g',
       rating: [1, 1, 1, 1, 0],
-      image: '/src/img/new-product/8.jpg',
-      hoverImage: '/src/img/new-product/back-8.jpg',
+      image: 'img/new-product/8.jpg',
+      hoverImage: 'img/new-product/back-8.jpg',
       flag: 'New',
     },
     {
@@ -128,8 +128,8 @@ const categoryRef = useRef(null);
       oldPrice: '$10',
       weight: '500g',
       rating: [1, 0, 0, 0, 0],
-      image: '/src/img/new-product/21.jpg',
-      hoverImage: '/src/img/new-product/21.jpg',
+      image: 'img/new-product/21.jpg',
+      hoverImage: 'img/new-product/21.jpg',
       flag: 'Sale',
     },
     {
@@ -140,8 +140,8 @@ const categoryRef = useRef(null);
       oldPrice: '$10',
       weight: '6pcs',
       rating: [1, 1, 1, 1, 1],
-      image: '/src/img/new-product/24.jpg',
-      hoverImage: '/src/img/new-product/24.jpg',
+      image: 'img/new-product/24.jpg',
+      hoverImage: 'img/new-product/24.jpg',
       flag: '',
     },
     {
@@ -152,8 +152,8 @@ const categoryRef = useRef(null);
       oldPrice: '$15',
       weight: '5kg',
       rating: [1, 1, 1, 1, 0],
-      image: '/src/img/new-product/19.jpg',
-      hoverImage: '/src/img/new-product/19.jpg',
+      image: 'img/new-product/19.jpg',
+      hoverImage: 'img/new-product/19.jpg',
       flag: 'New',
     },
     {
@@ -164,8 +164,8 @@ const categoryRef = useRef(null);
       oldPrice: '$31',
       weight: '20kg',
       rating: [1, 0, 0, 0, 0],
-      image: '/src/img/new-product/15.jpg',
-      hoverImage: '/src/img/new-product/15.jpg',
+      image: 'img/new-product/15.jpg',
+      hoverImage: 'img/new-product/15.jpg',
       flag: 'Hot',
     },
     {
@@ -176,8 +176,8 @@ const categoryRef = useRef(null);
       oldPrice: '$45',
       weight: '200g',
       rating: [1, 1, 1, 1, 1],
-      image: '/src/img/new-product/6.jpg',
-      hoverImage: '/src/img/new-product/back-6.jpg',
+      image: 'img/new-product/6.jpg',
+      hoverImage: 'img/new-product/back-6.jpg',
       flag: 'Sale',
     },
     {
@@ -188,8 +188,8 @@ const categoryRef = useRef(null);
       oldPrice: '$4',
       weight: '250g',
       rating: [1, 1, 1, 1, 0],
-      image: '/src/img/new-product/23.jpg',
-      hoverImage: '/src/img/new-product/23.jpg',
+      image: 'img/new-product/23.jpg',
+      hoverImage: 'img/new-product/23.jpg',
       flag: 'New',
     },
     {
@@ -200,8 +200,8 @@ const categoryRef = useRef(null);
       oldPrice: '$22',
       weight: '',
       rating: [1, 1, 0, 0, 0],
-      image: '/src/img/new-product/4.jpg',
-      hoverImage: '/src/img/new-product/back-4.jpg',
+      image: 'img/new-product/4.jpg',
+      hoverImage: 'img/new-product/back-4.jpg',
       flag: '',
     },
     {
@@ -212,8 +212,8 @@ const categoryRef = useRef(null);
       oldPrice: '',
       weight: '',
       rating: [1, 1, 1, 1, 1],
-      image: '/src/img/new-product/20.jpg',
-      hoverImage: '/src/img/new-product/20.jpg',
+      image: 'img/new-product/20.jpg',
+      hoverImage: 'img/new-product/20.jpg',
       flag: 'Trend',
       outOfStock: true,
     },
@@ -225,8 +225,8 @@ const categoryRef = useRef(null);
       oldPrice: '$17',
       weight: '2kg',
       rating: [1, 1, 0, 0, 0],
-      image: '/src/img/new-product/14.jpg',
-      hoverImage: '/src/img/new-product/14.jpg',
+      image: 'img/new-product/14.jpg',
+      hoverImage: 'img/new-product/14.jpg',
       flag: '',
     },
     {
@@ -237,8 +237,8 @@ const categoryRef = useRef(null);
       oldPrice: '$30',
       weight: '100ml',
       rating: [1, 1, 1, 1, 0],
-      image: '/src/img/new-product/2.jpg',
-      hoverImage: '/src/img/new-product/back-2.jpg',
+      image: 'img/new-product/2.jpg',
+      hoverImage: 'img/new-product/back-2.jpg',
       flag: 'Trend',
     },
     {
@@ -249,8 +249,8 @@ const categoryRef = useRef(null);
       oldPrice: '$31',
       weight: '250g',
       rating: [1, 1, 0, 0, 0],
-      image: '/src/img/new-product/7.jpg',
-      hoverImage: '/src/img/new-product/back-7.jpg',
+      image: 'img/new-product/7.jpg',
+      hoverImage: 'img/new-product/back-7.jpg',
       flag: 'New',
     },
   ];
@@ -261,41 +261,41 @@ const categoryRef = useRef(null);
       name: 'Mira Fashion Pvt. Ltd.',
       sales: 587,
       categories: 'Fruits (5) | Vegetables (30) | Snacks (09)',
-      mainImage: '/src/img/vendors/img-1.jpg',
-      vendorImage: '/src/img/vendors/vendor-1.jpg',
+      mainImage: 'img/vendors/img-1.jpg',
+      vendorImage: 'img/vendors/vendor-1.jpg',
     },
     {
       id: 1,
       name: 'Eelna Fashion Pvt. Ltd.',
       sales: 428,
       categories: 'Fruits (8) | Vegetables (15) | Snacks (04)',
-      mainImage: '/src/img/vendors/img-2.jpg',
-      vendorImage: '/src/img/vendors/vendor-2.jpg',
+      mainImage: 'img/vendors/img-2.jpg',
+      vendorImage: 'img/vendors/vendor-2.jpg',
     },
     {
       id: 2,
       name: 'Mario Fashion Pvt. Ltd.',
       sales: 1024,
       categories: 'Fruits (16) | Vegetables (42) | Snacks (18)',
-      mainImage: '/src/img/vendors/img-3.jpg',
-      vendorImage: '/src/img/vendors/vendor-3.jpg',
+      mainImage: 'img/vendors/img-3.jpg',
+      vendorImage: 'img/vendors/vendor-3.jpg',
     },
     {
       id: 3,
       name: 'Maria Fashion Pvt. Ltd.',
       sales: 210,
       categories: 'Fruits (2) | Vegetables (10) | Snacks (03)',
-      mainImage: '/src/img/vendors/img-4.jpg',
-      vendorImage: '/src/img/vendors/vendor-4.jpg',
+      mainImage: 'img/vendors/img-4.jpg',
+      vendorImage: 'img/vendors/vendor-4.jpg',
     },
   ];
   const instagramImages = [
-  '/src/img/instagram/1.jpg',
-  '/src/img/instagram/2.jpg',
-  '/src/img/instagram/3.jpg',
-  '/src/img/instagram/4.jpg',
-  '/src/img/instagram/5.jpg',
-  '/src/img/instagram/6.jpg'
+  'img/instagram/1.jpg',
+  'img/instagram/2.jpg',
+  'img/instagram/3.jpg',
+  'img/instagram/4.jpg',
+  'img/instagram/5.jpg',
+  'img/instagram/6.jpg'
 ];
 
   return (
@@ -306,7 +306,7 @@ const categoryRef = useRef(null);
           <div className="mb-minus-24 row">
             <div className="col-12 mb-24 col-lg-5">
               <div className="bb-category-img">
-                <img alt="category" src="/src/img/category/category.jpg" />
+                <img alt="category" src="img/category/category.jpg" />
                 <div className="bb-offers">
                   <span>50% Off</span>
                 </div>
@@ -431,7 +431,7 @@ const categoryRef = useRef(null);
                 <div className="banner-box bg-box-color-one">
                   <div className="inner-banner-box">
                     <div className="side-image">
-                      <img src="/src/img/banner/one.png" alt="one" />
+                      <img src="img/banner/one.png" alt="one" />
                     </div>
                     <div className="inner-contact">
                       <h5>Tasty Snack &amp; Fast food</h5>
@@ -452,7 +452,7 @@ const categoryRef = useRef(null);
                 <div className="banner-box bg-box-color-two">
                   <div className="inner-banner-box">
                     <div className="side-image">
-                      <img src="/src/img/banner/two.png" alt="two" />
+                      <img src="img/banner/two.png" alt="two" />
                     </div>
                     <div className="inner-contact">
                       <h5>Fresh Fruits &amp; Vegetables</h5>

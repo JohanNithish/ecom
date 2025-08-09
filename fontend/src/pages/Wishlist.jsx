@@ -10,8 +10,8 @@ const products = [
       oldPrice: '$10',
       weight: '500g',
       rating: [1, 1, 1, 1, 0],
-      image: '/src/img/new-product/8.jpg',
-      hoverImage: '/src/img/new-product/back-8.jpg',
+      image: 'img/new-product/8.jpg',
+      hoverImage: 'img/new-product/back-8.jpg',
       flag: 'New',
     },
     {
@@ -22,8 +22,8 @@ const products = [
       oldPrice: '$10',
       weight: '500g',
       rating: [1, 0, 0, 0, 0],
-      image: '/src/img/new-product/21.jpg',
-      hoverImage: '/src/img/new-product/21.jpg',
+      image: 'img/new-product/21.jpg',
+      hoverImage: 'img/new-product/21.jpg',
       flag: 'Sale',
     },
     {
@@ -34,8 +34,8 @@ const products = [
       oldPrice: '$10',
       weight: '6pcs',
       rating: [1, 1, 1, 1, 1],
-      image: '/src/img/new-product/24.jpg',
-      hoverImage: '/src/img/new-product/24.jpg',
+      image: 'img/new-product/24.jpg',
+      hoverImage: 'img/new-product/24.jpg',
       flag: '',
     },
     {
@@ -46,8 +46,8 @@ const products = [
       oldPrice: '$15',
       weight: '5kg',
       rating: [1, 1, 1, 1, 0],
-      image: '/src/img/new-product/19.jpg',
-      hoverImage: '/src/img/new-product/19.jpg',
+      image: 'img/new-product/19.jpg',
+      hoverImage: 'img/new-product/19.jpg',
       flag: 'New',
     }
   ];

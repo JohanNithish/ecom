@@ -52,7 +52,7 @@ function Footer() {
             </li><li><a href="#">Skin Lotion</a>
             </li><li><a href="#">Liner</a>
             </li><li><a href="#">Lipstick</a></li></ul></div></div></div></div></div></div></div></div>
-        </div><div className="footer-container"><div className="footer-top padding-tb-50"><div className="container"><div className="m-minus-991 row"><div className="bb-footer-cat col-12 col-lg-3"><div className="bb-footer-widget bb-footer-company"><img className="bb-footer-logo" alt="footer logo" src="/src/img/logo-1.png" /><img className="bb-footer-dark-logo" alt="footer logo" src="/src/img/logo/logo.png" /><p className="bb-footer-detail">BlueBerry is the biggest market of grocery products. Get your daily needs from our store.</p><div className="bb-app-store"><a href="#" className="app-img"><img className="adroid" alt="apple" src="/src/img/android.png" /></a><a href="#" className="app-img"><img className="apple" alt="apple" src="/src/img/apple.png" /></a></div></div>
+        </div><div className="footer-container"><div className="footer-top padding-tb-50"><div className="container"><div className="m-minus-991 row"><div className="bb-footer-cat col-12 col-lg-3"><div className="bb-footer-widget bb-footer-company"><img className="bb-footer-logo" alt="footer logo" src="img/logo-1.png" /><img className="bb-footer-dark-logo" alt="footer logo" src="img/logo/logo.png" /><p className="bb-footer-detail">BlueBerry is the biggest market of grocery products. Get your daily needs from our store.</p><div className="bb-app-store"><a href="#" className="app-img"><img className="adroid" alt="apple" src="img/android.png" /></a><a href="#" className="app-img"><img className="apple" alt="apple" src="img/apple.png" /></a></div></div>
         </div><div className="bb-footer-info col-12 col-lg-2"><div className="bb-footer-widget"><h4 className="bb-footer-heading">Category<div className="bb-heading-res"><i className="ri-arrow-down-s-line"></i></div>
         </h4><div className="bb-footer-links bb-footer-dropdown" style={{overflow: "hidden",display: "block",paddingBottom: "0px",height: "0px",opacity: 0,transform: "translateY(-20px)"}}><ul className="align-items-center"><li className="bb-footer-link"><a>Snacks</a>
         </li><li className="bb-footer-link"><a>Juice</a>
@@ -88,7 +88,7 @@ function Footer() {
         </div><div className="footer-bottom"><div className="container"><div className="row"><div className="bb-bottom-info"><div className="footer-copy"><div className="footer-bottom-copy "><div className="bb-copy">Copyright © <span id="copyright_year">2025 </
         span><a className="site-name" href="/">BlueBerry</
         a> all rights reserved.</div></div>
-        </div><div className="footer-bottom-right"><div className="footer-bottom-payment d-flex justify-content-center"><div className="payment-link"><img alt="payment" src="/src/img/payment.png" /></div></div></div></div></div></div></div></div>
+        </div><div className="footer-bottom-right"><div className="footer-bottom-payment d-flex justify-content-center"><div className="payment-link"><img alt="payment" src="img/payment.png" /></div></div></div></div></div></div></div></div>
         </footer>
     )
 }

@@ -12,10 +12,10 @@ import Breadcrumb from '../comp/Breadcrum';
 
 function Cart() {
 const initialCart = [
-  { id: 1, name: "Black Pepper Spice pack", price: 32, image: "/src/img/new-product/5.jpg", qty: 1 },
-  { id: 2, name: "Small Cardamom Spice Pack", price: 41, image: "/src/img/new-product/6.jpg", qty: 1 },
-  { id: 3, name: "Chilli Flakes Pack", price: 29, image: "/src/img/new-product/7.jpg", qty: 1 },
-  { id: 4, name: "Tomato Ketchup Pack", price: 9, image: "/src/img/new-product/8.jpg", qty: 1 },
+  { id: 1, name: "Black Pepper Spice pack", price: 32, image: "img/new-product/5.jpg", qty: 1 },
+  { id: 2, name: "Small Cardamom Spice Pack", price: 41, image: "img/new-product/6.jpg", qty: 1 },
+  { id: 3, name: "Chilli Flakes Pack", price: 29, image: "img/new-product/7.jpg", qty: 1 },
+  { id: 4, name: "Tomato Ketchup Pack", price: 9, image: "img/new-product/8.jpg", qty: 1 },
 ];
 
   const [cart, setCart] = useState(initialCart);
@@ -51,8 +51,8 @@ const initialCart = [
   const total = subTotal + delivery - discount;
 const deals = [
     {
-      img: '/src/img/product/3.jpg',
-      hoverImg: '/src/img/product/back-3.jpg',
+      img: 'img/product/3.jpg',
+      hoverImg: 'img/product/back-3.jpg',
       tag: '',
       category: 'Juice',
       title: 'Mixed Almond nuts juice Pack',
@@ -61,8 +61,8 @@ const deals = [
       quantity: '250 g',
     },
     {
-      img: '/src/img/product/4.jpg',
-      hoverImg: '/src/img/product/back-4.jpg',
+      img: 'img/product/4.jpg',
+      hoverImg: 'img/product/back-4.jpg',
       tag: 'Sale',
       category: 'Fruits',
       title: 'Fresh Mango Slice Juice',
@@ -71,8 +71,8 @@ const deals = [
       quantity: '100 ml',
     },
     {
-      img: '/src/img/new-product/5.jpg',
-      hoverImg: '/src/img/new-product/back-5.jpg',
+      img: 'img/new-product/5.jpg',
+      hoverImg: 'img/new-product/back-5.jpg',
       tag: '',
       category: 'Spices',
       title: 'Black Pepper Spice pack',
@@ -81,8 +81,8 @@ const deals = [
       quantity: '1 pack',
     },
     {
-      img: '/src/img/product/1.jpg',
-      hoverImg: '/src/img/product/back-1.jpg',
+      img: 'img/product/1.jpg',
+      hoverImg: 'img/product/back-1.jpg',
       tag: 'New',
       category: 'Chocos',
       title: 'Mixed Fruits Chocolates',
@@ -91,8 +91,8 @@ const deals = [
       quantity: '1 Pack',
     },
     {
-      img: '/src/img/product/2.jpg',
-      hoverImg: '/src/img/product/back-2.jpg',
+      img: 'img/product/2.jpg',
+      hoverImg: 'img/product/back-2.jpg',
       tag: 'Hot',
       category: 'Juice',
       title: 'Organic Apple Juice Pack',
