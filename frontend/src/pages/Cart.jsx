@@ -12,10 +12,10 @@ import Breadcrumb from '../comp/Breadcrum';
 
 function Cart() {
 const initialCart = [
-  { id: 1, name: "Black Pepper Spice pack", price: 32, image: "img/new-product/5.jpg", qty: 1 },
-  { id: 2, name: "Small Cardamom Spice Pack", price: 41, image: "img/new-product/6.jpg", qty: 1 },
-  { id: 3, name: "Chilli Flakes Pack", price: 29, image: "img/new-product/7.jpg", qty: 1 },
-  { id: 4, name: "Tomato Ketchup Pack", price: 9, image: "img/new-product/8.jpg", qty: 1 },
+  { id: 1, name: "Black Pepper Spice pack", price: 32, image: "/img/new-product/5.jpg", qty: 1 },
+  { id: 2, name: "Small Cardamom Spice Pack", price: 41, image: "/img/new-product/6.jpg", qty: 1 },
+  { id: 3, name: "Chilli Flakes Pack", price: 29, image: "/img/new-product/7.jpg", qty: 1 },
+  { id: 4, name: "Tomato Ketchup Pack", price: 9, image: "/img/new-product/8.jpg", qty: 1 },
 ];
 
   const [cart, setCart] = useState(initialCart);

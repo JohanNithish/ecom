@@ -11,7 +11,7 @@ const SideCart = (props) => {
       price: 32,
       unit: "1pack",
       qty: 1,
-      img: "img/new-product/5.jpg",
+      img: "/img/new-product/5.jpg",
     },
     {
       id: 2,
@@ -19,7 +19,7 @@ const SideCart = (props) => {
       price: 41,
       unit: "200g",
       qty: 1,
-      img: "img/new-product/6.jpg",
+      img: "/img/new-product/6.jpg",
     },
     {
       id: 3,
@@ -27,7 +27,7 @@ const SideCart = (props) => {
       price: 29,
       unit: "250g",
       qty: 1,
-      img: "img/new-product/7.jpg",
+      img: "/img/new-product/7.jpg",
     },
     {
       id: 4,
@@ -35,7 +35,7 @@ const SideCart = (props) => {
       price: 9,
       unit: "500g",
       qty: 1,
-      img: "img/new-product/8.jpg",
+      img: "/img/new-product/8.jpg",
     },
   ]);
 
@@ -47,7 +47,7 @@ const SideCart = (props) => {
       price: 15,
       unit: "100 ml",
       stock: 3,
-      img: "img/product/2.jpg",
+      img: "/img/product/2.jpg",
     },
   ];
 
@@ -122,7 +122,7 @@ const SideCart = (props) => {
                       <img
                         className="hover-img"
                         alt={item.name}
-                        src="img/product/back-2.jpg"
+                        src="/img/product/back-2.jpg"
                       />
                     </div>
                     <ul className="bb-pro-actions">
@@ -165,7 +165,7 @@ const SideCart = (props) => {
               </div>
               
             ))}
-            <div className="bb-cart-banner mb-24"><div className="banner"><img alt="cart-banner" src="img/category/cart-banner.jpg"/><div className="detail"><h4>Organic &amp; Fresh</h4><h3>Vegetables</h3><a href="/shop-left-sidebar-col-3/">Buy Now</a></div></div></div>
+            <div className="bb-cart-banner mb-24"><div className="banner"><img alt="cart-banner" src="/img/category/cart-banner.jpg"/><div className="detail"><h4>Organic &amp; Fresh</h4><h3>Vegetables</h3><a href="/shop-left-sidebar-col-3/">Buy Now</a></div></div></div>
           </div>
         </div>
 

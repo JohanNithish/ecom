@@ -25,32 +25,32 @@ const categoryRef = useRef(null);
     {
       title: "Fruits",
       items: 291,
-      img: "img/category/2.svg",
+      img: "/img/category/2.svg",
     },
     {
       title: "Cold Drinks",
       items: 49,
-      img: "img/category/3.svg",
+      img: "/img/category/3.svg",
     },
     {
       title: "Bakery",
       items: 8,
-      img: "img/category/4.svg",
+      img: "/img/category/4.svg",
     },
     {
       title: "Fast Food",
       items: 291,
-      img: "img/category/5.svg",
+      img: "/img/category/5.svg",
     },
     {
       title: "Snacks",
       items: 49,
-      img: "img/category/6.svg",
+      img: "/img/category/6.svg",
     },
     {
       title: "Vegetables",
       items: 485,
-      img: "img/category/1.svg",
+      img: "/img/category/1.svg",
     },
   ];
 
@@ -306,7 +306,7 @@ const categoryRef = useRef(null);
           <div className="mb-minus-24 row">
             <div className="col-12 mb-24 col-lg-5">
               <div className="bb-category-img">
-                <img alt="category" src="img/category/category.jpg" />
+                <img alt="category" src="/img/category/category.jpg" />
                 <div className="bb-offers">
                   <span>50% Off</span>
                 </div>
@@ -431,7 +431,7 @@ const categoryRef = useRef(null);
                 <div className="banner-box bg-box-color-one">
                   <div className="inner-banner-box">
                     <div className="side-image">
-                      <img src="img/banner/one.png" alt="one" />
+                      <img src="/img/banner/one.png" alt="one" />
                     </div>
                     <div className="inner-contact">
                       <h5>Tasty Snack &amp; Fast food</h5>
@@ -452,7 +452,7 @@ const categoryRef = useRef(null);
                 <div className="banner-box bg-box-color-two">
                   <div className="inner-banner-box">
                     <div className="side-image">
-                      <img src="img/banner/two.png" alt="two" />
+                      <img src="/img/banner/two.png" alt="two" />
                     </div>
                     <div className="inner-contact">
                       <h5>Fresh Fruits &amp; Vegetables</h5>

@@ -70,7 +70,7 @@ const About = () => {
           {/* Left Column - Image */}
           <div className="col-12 col-lg-6 mb-24">
             <div className="bb-about-img">
-              <img src="img/one.png" alt="about-one" />
+              <img src="/img/one.png" alt="about-one" />
             </div>
           </div>
 

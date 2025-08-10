@@ -52,31 +52,31 @@ const Checkout = () => {
                         price: "$32",
                         oldPrice: "$22.00",
                         rating: 4,
-                        img: "img/new-product/5.jpg"
+                        img: "/img/new-product/5.jpg"
                       }, {
                         name: "Small Cardamom Spice Pack",
                         price: "$41",
                         oldPrice: "$45.00",
                         rating: 5,
-                        img: "img/new-product/6.jpg"
+                        img: "/img/new-product/6.jpg"
                       }, {
                         name: "Chilli Flakes Pack",
                         price: "$29",
                         oldPrice: "$31.00",
                         rating: 2,
-                        img: "img/new-product/7.jpg"
+                        img: "/img/new-product/7.jpg"
                       }, {
                         name: "Tomato Ketchup Pack",
                         price: "$9",
                         oldPrice: "$10.00",
                         rating: 4,
-                        img: "img/new-product/8.jpg"
+                        img: "/img/new-product/8.jpg"
                       }, {
                         name: "Organic Apple Juice Pack",
                         price: "$15",
                         oldPrice: "",
                         rating: 4,
-                        img: "img/product/2.jpg"
+                        img: "/img/product/2.jpg"
                       }].map((product, index) => (
                         <div className="pro-items" key={index}>
                           <div className="image">
@@ -174,7 +174,7 @@ const Checkout = () => {
                   <div className="checkout-items">
                     <div className="sub-title"><h4>Payment Method</h4></div>
                     <div className="payment-img">
-                      <img alt="payment" src="img/payment.png" />
+                      <img alt="payment" src="/img/payment.png" />
                     </div>
                   </div>
                 </div>

@@ -32,12 +32,12 @@ function Testimonials() {
           <div className="row">
             <div className="col-12 position-relative bb-testimonials">
               {/* Background Images */}
-              <img className="testimonials-img-1" src="img/testimonials/img-1.png" alt="bg" />
-              <img className="testimonials-img-2" src="img/testimonials/img-2.png" alt="bg" />
-              <img className="testimonials-img-3" src="img/testimonials/img-3.png" alt="bg" />
-              <img className="testimonials-img-4" src="img/testimonials/img-4.png" alt="bg" />
-              <img className="testimonials-img-5" src="img/testimonials/img-5.png" alt="bg" />
-              <img className="testimonials-img-6" src="img/testimonials/img-6.png" alt="bg" />
+              <img className="testimonials-img-1" src="/img/testimonials/img-1.png" alt="bg" />
+              <img className="testimonials-img-2" src="/img/testimonials/img-2.png" alt="bg" />
+              <img className="testimonials-img-3" src="/img/testimonials/img-3.png" alt="bg" />
+              <img className="testimonials-img-4" src="/img/testimonials/img-4.png" alt="bg" />
+              <img className="testimonials-img-5" src="/img/testimonials/img-5.png" alt="bg" />
+              <img className="testimonials-img-6" src="/img/testimonials/img-6.png" alt="bg" />
 
               <div className="inner-banner">
                 <h4>Testimonials</h4>

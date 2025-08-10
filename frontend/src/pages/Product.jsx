@@ -39,8 +39,8 @@ const Product = () => {
   {
     id: 1,
     tag: "Hot",
-    img: "img/product/2.jpg",
-    hoverImg: "img/product/back-2.jpg",
+    img: "/img/product/2.jpg",
+    hoverImg: "/img/product/back-2.jpg",
     category: "Juice",
     title: "Organic Apple Juice Pack",
     newPrice: "$15",
@@ -50,8 +50,8 @@ const Product = () => {
   {
     id: 2,
     tag: "",
-    img: "img/product/3.jpg",
-    hoverImg: "img/product/back-3.jpg",
+    img: "/img/product/3.jpg",
+    hoverImg: "/img/product/back-3.jpg",
     category: "Juice",
     title: "Mixed Almond nuts juice Pack",
     newPrice: "$39",
@@ -61,8 +61,8 @@ const Product = () => {
   {
     id: 3,
     tag: "Sale",
-    img: "img/product/4.jpg",
-    hoverImg: "img/product/back-4.jpg",
+    img: "/img/product/4.jpg",
+    hoverImg: "/img/product/back-4.jpg",
     category: "Fruits",
     title: "Fresh Mango Slice Juice",
     newPrice: "$25",
@@ -72,8 +72,8 @@ const Product = () => {
   {
     id: 4,
     tag: "",
-    img: "img/new-product/5.jpg",
-    hoverImg: "img/new-product/back-5.jpg",
+    img: "/img/new-product/5.jpg",
+    hoverImg: "/img/new-product/back-5.jpg",
     category: "Spices",
     title: "Black Pepper Spice pack",
     newPrice: "$22",
@@ -83,8 +83,8 @@ const Product = () => {
   {
     id: 5,
     tag: "New",
-    img: "img/product/1.jpg",
-    hoverImg: "img/product/back-1.jpg",
+    img: "/img/product/1.jpg",
+    hoverImg: "/img/product/back-1.jpg",
     category: "Chocos",
     title: "Mixed Fruits Chocolates",
     newPrice: "$20",
@@ -122,7 +122,7 @@ const Product = () => {
                       <Slider {...thumbSliderSettings}>
                         {productImages.map((src, index) => (
                           <div key={index} className="single-slide">
-                            <img className="img-responsive" src={src} alt={`thumb-${index}`} />
+                            <img className="/img-responsive" src={src} alt={`thumb-${index}`} />
                           </div>
                         ))}
                       </Slider>

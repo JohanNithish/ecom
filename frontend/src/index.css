@@ -995,6 +995,11 @@ opacity: 0 !important;
 visibility: hidden !important;
 transition: max-height 0s ease, opacity 0s ease;
 max-height: 0;
+padding-bottom: 0 !important;
+padding-top: 0 !important;
+}
+.bb-dropdown-menu li{
+  background: #fff;
 }
   .bottom-header .inner-bottom-header .bb-header-buttons .bb-acc-drop .bb-dropdown-menu {
     min-width: 150px;
