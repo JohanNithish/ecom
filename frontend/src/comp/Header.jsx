@@ -3,11 +3,14 @@ import Dropdown from 'rc-dropdown';
 import Menu, { Item as MenuItem } from 'rc-menu';
 import 'rc-dropdown/assets/index.css';
 import 'rc-menu/assets/index.css';
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Popup from "./Popup";
 import SideCart from "./SideCart";
 
 function Header() {
+
+
+
     const [state, setState] = useState({
         location: "Coimbatore",
         item: "Vegetables",
@@ -44,6 +47,13 @@ function Header() {
         refs[type].current.classList.toggle('bb-menu-open');
         setState((prev) => ({...prev, popup: prev.popup === type ? null : type, }));
     };
+
+    const handlePopupLinkClick = (type, e) => {
+  if (e.target.tagName === 'A') {
+    refs[type].current.classList.remove('bb-menu-open');
+    setState(prev => ({ ...prev, popup: null }));
+  }
+};
     useEffect(() => {
         const menu = refs.menu.current;
 
@@ -71,6 +81,8 @@ function Header() {
     const handleSelect = (field) => ({ key }) => {
         setState(prev => ({ ...prev, [field]: key }));
     };
+
+
 
     return (
 <>
@@ -114,7 +126,7 @@ function Header() {
                         <div className="col-12">
                             <div className="inner-bottom-header">
                                 <div className="cols bb-logo-detail">
-                                    <div className="header-logo"><NavLink to="/"><img src="img/logo-1.png" className="light" /></NavLink></div><a
+                                    <div className="header-logo"><NavLink to="/"><img src="/img/logo-1.png" className="light" /></NavLink></div><a
                                         className="bb-sidebar-toggle bb-category-toggle" href="#"><svg className="svg-icon"
                                             viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
                                             <path
@@ -147,7 +159,7 @@ function Header() {
                                         </div>
                                     </div>
                                     <div className="cols bb-icons mob-stickey" ref={refs.mobHeader}>
-                                        <div className="header-logo"><NavLink to="/"><img src="img/logo-1.png" className="light" /></NavLink></div>
+                                        <div className="header-logo"><NavLink to="/"><img src="/img/logo-1.png" className="light" /></NavLink></div>
                                         <div className="bb-flex-justify">
                                             <div className="bb-header-buttons">
                                                 <div className="bb-acc-drop"><div
@@ -208,7 +220,7 @@ function Header() {
                     <div className="bb-menu-title"><span className="menu_title">My Menu</span><button type="button" onClick={() => PopUp("menu")}
                         className="bb-close-menu">×</button></div>
                     <div className="bb-menu-inner">
-                        <div className="bb-menu-content">
+                        <div className="bb-menu-content" onClick={(e) => handlePopupLinkClick('menu', e)}>
                             <ul>
                                 <li><NavLink to="/">Home</NavLink></li>
                                 <li><span className="menu-toggle"  ></span><a href="#">Categories</a>
@@ -504,7 +516,7 @@ function Header() {
             <div></div>
 
             
-                <SideCart setref={refs.cart} PopUp={PopUp} />
+                <SideCart setref={refs.cart} PopUp={PopUp} closePopup={handlePopupLinkClick} />
                 <Popup overlay={state.popup} PopUp={PopUp} />
         </header>
         

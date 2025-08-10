@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Popup from "./Popup";
+import { Link } from "react-router-dom";
 
 const SideCart = (props) => {
   // Initial cart items
@@ -98,7 +99,7 @@ const SideCart = (props) => {
 
   return (
     <>
-    <div className="bb-side-cart" ref={props.setref}>
+    <div className="bb-side-cart" ref={props.setref} onClick={(e) => props.closePopup('cart', e)}>
       <div className="row h-full row">
         {/* Related Items */}
         <div className="col-12 d-none-767 col-md-5">
@@ -253,12 +254,12 @@ const SideCart = (props) => {
                 </table>
               </div>
               <div className="cart-btn">
-                <a className="bb-btn-1" href="/cart/">
+                <Link className="bb-btn-1" to="/cart">
                   View Cart
-                </a>
-                <a className="bb-btn-2" href="/checkout/">
+                </Link>
+                <Link className="bb-btn-2" to="/checkout">
                   Checkout
-                </a>
+                </Link>
               </div>
             </div>
           </div>

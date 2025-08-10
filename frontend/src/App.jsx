@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import 'bootstrap/dist/css/bootstrap.css';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import User from './pages/User';
 import AdminPage from "./admin/AdminPage";
 import Error404 from "./pages/Error404";
