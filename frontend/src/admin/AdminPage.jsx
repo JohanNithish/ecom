@@ -5,9 +5,10 @@ import '../App.css';
 import Home from './Home';
 import Login from './Login';
 import Error404 from '../pages/Error404';
-import AddUser from './AddUser';
+import AddProduct from './AddProduct';
 import ListUser from './ListUser';
 import ProtectedRoute from './ProtectedRoute';
+import Category from './Category';
 function AdminPage() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -34,7 +35,8 @@ const isLoginPage = location.pathname === "/admin/login";
           <div className="page-section">
             <Routes>
               <Route path="/home" element={<Home />} />
-              <Route path="/adduser" element={<AddUser />} />
+              <Route path="/category" element={<Category />} />
+              <Route path="/addproduct" element={<AddProduct />} />
               <Route path="/listuser" element={<ListUser />} />
               <Route path="*" element={<Error404 />} />
             </Routes>

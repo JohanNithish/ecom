@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import AdminHeader from "../comp/AdminHeader";
 export default function AddUser() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -105,6 +106,8 @@ export default function AddUser() {
 const element = <h1>Hello, world!</h1>;
 
   return (
+    <>
+    <AdminHeader page="Add Product" />
     <form
       className="card border-top border-0 border-4 border-primary"
       onSubmit={handleSubmit}
@@ -213,5 +216,6 @@ const element = <h1>Hello, world!</h1>;
         </div>
       </div>
     </form>
+    </>
   );
 }
