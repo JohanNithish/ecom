@@ -2,6 +2,8 @@ import { Navigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode"; // fixed import
 import axios from "axios";
 import { useState, useEffect } from "react";
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 
 const ProtectedRoute = ({ children }) => {
   const [authChecked, setAuthChecked] = useState(false);
@@ -55,7 +57,14 @@ const ProtectedRoute = ({ children }) => {
   }, [apiUrl]);
 
   if (!authChecked) {
-    return <div>Loading...</div>; // loader placeholder
+    return <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        height="100vh"
+      >
+        <CircularProgress />
+      </Box>; // loader placeholder
   }
 
   return isAuth ? children : <Navigate to="/admin/login" replace />;
