@@ -5,7 +5,7 @@ exports.insertCategory = async (req, res, next) => {
         const categoryData = {
             category: req.body.category, 
             description: req.body.description,
-            createdBy: req.body.createdBy || 0,
+            createdBy: req.user.id,
             createdAt: new Date()
         };
         const newCategory = await categoryModel.create(categoryData);
@@ -51,7 +51,7 @@ exports.putCategory = async (req, res, next) => {
             {
                 category: req.body.category,
                 description: req.body.description,
-                modifieBy: req.body.modifieBy,
+                modifieBy: req.user.id,
                 modifiedAt: new Date(),
             },
             { new: true } // return the updated document

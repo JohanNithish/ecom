@@ -1,10 +1,10 @@
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import api from "../api/axios"; // instead of raw axios
 
 
 export default function Login() {
-const apiUrl = import.meta.env.VITE_API_ADMIN;
 const navigate = useNavigate();
 const handleSubmit = async (e) => {
   e.preventDefault();
@@ -16,8 +16,8 @@ const handleSubmit = async (e) => {
   };
 
   try {
-      const res = await axios.post(`${apiUrl}/adminlogin`, formData);
-      localStorage.setItem("isAdmin", "true");
+      const res = await api.post(`/adminlogin`, formData);
+      localStorage.setItem("accessToken", res.data.accessToken);
       navigate("/admin/home", { state: { message: res.data.message } });
     } catch (err) {
       console.error(err);

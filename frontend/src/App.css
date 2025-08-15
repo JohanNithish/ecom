@@ -136,6 +136,20 @@ p {
     gap: 0.5rem;
     width: 100%;;
 }
+.btn-action{
+  padding: 5px;
+  background: #6c7fd8;
+  color: #fff;
+  font-size: 25px;
+  border-radius: 5px;
+}
+.btn-trash{
+  padding: 5px;
+  background: #e81f1f;
+  color: #fff;
+  font-size: 25px;
+  border-radius: 5px;
+}
 .breadcrumb{
   width: 100%;
   position: relative;

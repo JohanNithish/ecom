@@ -18,7 +18,8 @@ import {
 export const SideBar = ({ isOpen, ToggleSidebar }) => {
   const navigate = useNavigate();
   const handleLogout = () => {
-    localStorage.removeItem("isAdmin");
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
     navigate("/admin/login");
   };
 
