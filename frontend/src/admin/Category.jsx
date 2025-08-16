@@ -18,9 +18,43 @@ import { DataGrid } from '@mui/x-data-grid';
 
 // React Hook Form
 import { useForm, Controller } from 'react-hook-form';
-import debounce from 'lodash.debounce';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+
+// =========================
+// Memoized Dialog Component
+// =========================
+const CategoryDialog = React.memo(({ open, onClose, onSubmit, control, editingId }) => (
+  <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm" keepMounted>
+    <DialogTitle>{editingId ? 'Edit Category' : 'Create New Category'}</DialogTitle>
+    <DialogContent>
+      <Stack spacing={2} sx={{ mt: 1 }}>
+        <Controller
+          name="category"
+          control={control}
+          rules={{ required: true }}
+          render={({ field }) => (
+            <TextField {...field} label="Category Name" fullWidth required />
+          )}
+        />
+        <Controller
+          name="description"
+          control={control}
+          rules={{ required: true }}
+          render={({ field }) => (
+            <TextField {...field} label="Description" fullWidth required />
+          )}
+        />
+      </Stack>
+    </DialogContent>
+    <DialogActions>
+      <Button onClick={onClose}>Cancel</Button>
+      <Button onClick={onSubmit} variant="contained" color="primary">
+        {editingId ? 'Update' : 'Submit'}
+      </Button>
+    </DialogActions>
+  </Dialog>
+));
 
 const Category = () => {
   const [categories, setCategories] = useState([]);
@@ -31,11 +65,13 @@ const Category = () => {
   const fetchCategories = useCallback(async () => {
     try {
       const res = await api.get('/master');
-      if (res.data.success) setCategories(res.data.data || []);
-      else toast.error('Failed to fetch categories');
+      if (res.data.success) {
+        setCategories(res.data.data || []);
+      } else {
+        toast.error('Failed to fetch categories');
+      }
     } catch (err) {
       toast.error(err?.response?.data?.message || 'Error fetching categories');
-      console.error(err);
     }
   }, []);
 
@@ -44,12 +80,9 @@ const Category = () => {
   }, [fetchCategories]);
 
   // React Hook Form
-  const { control, handleSubmit, reset } = useForm({
+  const { control, handleSubmit, reset, setValue } = useForm({
     defaultValues: { category: '', description: '' }
   });
-
-  // Debounced update
-  const debouncedChange = useCallback(debounce((field, value) => {}, 200), []);
 
   // Submit handler
   const onSubmit = async (data) => {
@@ -58,31 +91,46 @@ const Category = () => {
         const res = await api.put(`/master/${editingId}`, data);
         if (res.data.success) {
           toast.success('Category updated!');
-          setCategories(prev => prev.map(c => c._id === editingId ? { ...c, ...data } : c));
-        } else toast.error('Update failed');
+          setCategories(prev =>
+            prev.map(c => c._id === editingId ? { ...c, ...data } : c)
+          );
+        } else {
+          toast.error('Update failed');
+        }
       } else {
         const res = await api.post('/master', data);
         if (res.data.success) {
           toast.success('Category created!');
           setCategories(prev => [...prev, res.data.data]);
-        } else toast.error('Insert failed');
+        } else {
+          toast.error('Insert failed');
+        }
       }
-      setOpen(false);
-      reset({ category: '', description: '' });
-      setEditingId(null);
+      handleClose();
     } catch (err) {
       toast.error((editingId ? 'Update' : 'Insert') + ' failed: ' + err.message);
     }
   };
 
-  // Edit
-  const handleEdit = useCallback((row) => {
-    reset({ category: row.category, description: row.description });
-    setEditingId(row._id);
+  // Handle dialog open for new category
+  const handleNew = () => {
+    reset({ category: '', description: '' });
+    setEditingId(null);
     setOpen(true);
-  }, [reset]);
+  };
 
-  // Delete
+  // Handle edit by ID
+  const handleEditById = useCallback((id) => {
+    const row = categories.find(c => c._id === id);
+    if (row) {
+      setValue('category', row.category);
+      setValue('description', row.description);
+      setEditingId(row._id);
+      setOpen(true);
+    }
+  }, [categories, setValue]);
+
+  // Handle delete by ID
   const handleDelete = useCallback(async (id) => {
     if (!window.confirm('Are you sure you want to delete this category?')) return;
     try {
@@ -90,11 +138,20 @@ const Category = () => {
       if (res.data.success) {
         toast.success('Category Deleted!');
         setCategories(prev => prev.filter(c => c._id !== id));
-      } else toast.error('Delete failed');
+      } else {
+        toast.error('Delete failed');
+      }
     } catch (err) {
       toast.error('Delete failed: ' + err.message);
     }
   }, []);
+
+  // Close dialog
+  const handleClose = () => {
+    setOpen(false);
+    setEditingId(null);
+    reset({ category: '', description: '' });
+  };
 
   // DataGrid columns
   const columns = useMemo(() => [
@@ -107,21 +164,24 @@ const Category = () => {
       minWidth: 120,
       sortable: false,
       filterable: false,
-      renderCell: (params) => (
+      renderCell: ({ id }) => (
         <div className="d-flex gap-2 align-items-center">
           <div role="button">
-          <FontAwesomeIcon className="btn-action"  onClick={() => handleEdit(params.row)} icon={faEdit} />  
+            <FontAwesomeIcon className="btn-action" onClick={() => handleEditById(id)} icon={faEdit} />
           </div>
           <div role="button">
-          <FontAwesomeIcon className="btn-trash" onClick={() => handleDelete(params.row.id)} icon={faTrashAlt} />
-            </div>
+            <FontAwesomeIcon className="btn-trash" onClick={() => handleDelete(id)} icon={faTrashAlt} />
+          </div>
         </div>
       )
     }
-  ], [handleEdit, handleDelete]);
+  ], [handleEditById, handleDelete]);
 
-  // Rows with unique `id` for DataGrid
-  const rows = useMemo(() => categories.map(c => ({ ...c, id: c._id })), [categories]);
+  // Rows for DataGrid
+  const rows = useMemo(
+    () => categories.map(c => ({ ...c, id: c._id })),
+    [categories]
+  );
 
   return (
     <>
@@ -129,61 +189,23 @@ const Category = () => {
 
       <div className="text-end" style={{ marginBottom: 16 }}>
         <Button
-        variant="outlined"
-  color="inherit"
-           startIcon={<AddIcon />}
-          onClick={() => { reset({ category: '', description: '' }); setEditingId(null); setOpen(true); }}
+          variant="outlined"
+          color="inherit"
+          startIcon={<AddIcon />}
+          onClick={handleNew}
         >
           New Category
         </Button>
       </div>
 
       {/* Dialog for Create/Edit */}
-      <Dialog open={open} onClose={() => setOpen(false)} fullWidth maxWidth="sm">
-        <DialogTitle>{editingId ? 'Edit Category' : 'Create New Category'}</DialogTitle>
-        <DialogContent>
-          <Stack spacing={2} sx={{ mt: 1 }}>
-            <Controller
-              name="category"
-              control={control}
-              render={({ field }) => (
-                <TextField
-                  {...field}
-                  label="Category Name"
-                  fullWidth
-                  required
-                  onChange={(e) => {
-                    field.onChange(e);
-                    debouncedChange('category', e.target.value);
-                  }}
-                />
-              )}
-            />
-            <Controller
-              name="description"
-              control={control}
-              render={({ field }) => (
-                <TextField
-                  {...field}
-                  label="Description"
-                  fullWidth
-                  required
-                  onChange={(e) => {
-                    field.onChange(e);
-                    debouncedChange('description', e.target.value);
-                  }}
-                />
-              )}
-            />
-          </Stack>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setOpen(false)}>Cancel</Button>
-          <Button onClick={handleSubmit(onSubmit)} variant="contained" color="primary">
-            {editingId ? 'Update' : 'Submit'}
-          </Button>
-        </DialogActions>
-      </Dialog>
+      <CategoryDialog
+        open={open}
+        onClose={handleClose}
+        onSubmit={handleSubmit(onSubmit)}
+        control={control}
+        editingId={editingId}
+      />
 
       {/* DataGrid Table */}
       <div style={{ height: 500, width: '100%' }}>
@@ -195,6 +217,13 @@ const Category = () => {
           disableSelectionOnClick
           autoHeight
           density="comfortable"
+          sx={{
+            '.MuiDataGrid-columnHeader': {
+              backgroundColor: '#6c7fd8',
+              color: '#fff',
+              fontWeight: '700',
+            }
+          }}
         />
       </div>
     </>

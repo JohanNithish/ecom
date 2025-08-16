@@ -3,6 +3,9 @@ const jwt = require("jsonwebtoken");
 const adminloginModels = require("../models/adminloginModels");
 
 exports.adminLogin = async (req, res) => {
+
+  // const hasedPassword = await bcrypt.hash(req.body.password, 10);
+  // console.log(hasedPassword);
   const { username, password } = req.body;
 
   if (!username || !password) {

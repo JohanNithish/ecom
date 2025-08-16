@@ -16,12 +16,14 @@ app.use(cors({
   allowedHeaders: ["Content-Type", "Authorization"]
 }));
 connectDB();
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 const master = require('./routes/master');
 const login = require('./routes/login');
+const product = require('./routes/product');
 app.use('/api/v1/',master);
 app.use('/api/v1/',login);
-
+app.use('/api/v1/',product);
 
 
 app.listen(process.env.PORT, () => {

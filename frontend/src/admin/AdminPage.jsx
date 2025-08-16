@@ -6,9 +6,10 @@ import Home from './Home';
 import Login from './Login';
 import Error404 from '../pages/Error404';
 import AddProduct from './AddProduct';
-import ListUser from './ListUser';
+import ListProduct from './ListProduct';
 import ProtectedRoute from './ProtectedRoute';
 import Category from './Category';
+import Deals from './Deals';
 function AdminPage() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -36,8 +37,9 @@ const isLoginPage = location.pathname === "/admin/login";
             <Routes>
               <Route path="/home" element={<Home />} />
               <Route path="/category" element={<Category />} />
+              <Route path="/deals" element={<Deals />} />
               <Route path="/addproduct" element={<AddProduct />} />
-              <Route path="/listuser" element={<ListUser />} />
+              <Route path="/listproduct" element={<ListProduct />} />
               <Route path="*" element={<Error404 />} />
             </Routes>
           </div>

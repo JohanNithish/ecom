@@ -1,221 +1,363 @@
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import AdminHeader from "../comp/AdminHeader";
-export default function AddUser() {
+import { Editor } from "@tinymce/tinymce-react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAdd, faTrash } from "@fortawesome/free-solid-svg-icons";
+import api from "../api/axios";
+import Cropper from "react-easy-crop";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
+import imageCompression from 'browser-image-compression';
+import { toast } from "react-toastify";
+export default function AddProduct() {
   const navigate = useNavigate();
   const location = useLocation();
-
+  const editorKey = import.meta.env.VITE_EDITOR_KEY;
   const editId = location.state?.id || null;
-  const handleChange = (e) => {
-    const { name, value, checked, type, files } = e.target;
-      
-    setFormData((prev) => {
-      // ✅ For multi-select checkbox (worktype)
-      if (type === "file") {
-        return { ...prev, [name]: files[0] };
-      }
-      if (name === "worktype") {
-        let updatedWorkTypes = Array.isArray(prev.worktype) ? [...prev.worktype] : [];
 
-        if (checked) {
-          // Add if checked
-          if (!updatedWorkTypes.includes(value)) {
-            updatedWorkTypes.push(value);
-          }
-        } else {
-          // Remove if unchecked
-          updatedWorkTypes = updatedWorkTypes.filter((item) => item !== value);
-        }
+  // Form data state
+  const [formData, setFormData] = useState({
+    category: "",
+    productname: "",
+    url: "",
+    sku: "",
+    mrp: "",
+    offerprice: "",
+    images: [null, null, null, null], // final cropped files
+    metrics: [{ id: 0, value: "" }],
+    description1: "",
+    description2: "",
+    detail: "",
+    information: "",
+    status: "1",
+  });
 
-        return { ...prev, worktype: updatedWorkTypes };
-      }
+  // Image objects for crop modal
+  const [images, setImages] = useState([
+    { file: null, src: null, croppedAreaPixels: null },
+    { file: null, src: null, croppedAreaPixels: null },
+    { file: null, src: null, croppedAreaPixels: null },
+    { file: null, src: null, croppedAreaPixels: null },
+  ]);
 
-      // ✅ For all other inputs (text, select, radio)
-      return { ...prev, [name]: value };
+  const [categories, setCategories] = useState([]);
+  const [cropModal, setCropModal] = useState({ show: false, index: null });
+  const [crop, setCrop] = useState({ x: 0, y: 0 });
+  const [zoom, setZoom] = useState(1);
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
+  const imgRef = useRef(null);
+  const refMetric = useRef(null);
+
+  // Fetch categories from API
+  useEffect(() => {
+    api
+      .get("/master")
+      .then((res) => {
+        if (res.data.success) setCategories(res.data.data || []);
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
+  // Handle input changes
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  // Metrics handlers
+  const handleMetricChange = (id, e) => {
+    const newMetrics = formData.metrics.map((metric) =>
+      metric.id === id ? { ...metric, value: e.target.value } : metric
+    );
+    setFormData({ ...formData, metrics: newMetrics });
+  };
+
+  const addMetric = () => {
+    setFormData({
+      ...formData,
+      metrics: [...formData.metrics, { id: formData.metrics.length, value: "" }],
     });
   };
 
+  const removeMetric = (id) => {
+    setFormData({
+      ...formData,
+      metrics: formData.metrics.filter((metric) => metric.id !== id),
+    });
+  };
 
-  const [formData, setFormData] = useState({
-    name: "",
-    age: "",
-    mobile: "",
-    course: "",
-    address: "",
-    worktype: [],
-    status: "1",
-    profile: null,
-  });
-
-
-  useEffect(() => {
-    if (editId) {
-      axios.get(`http://localhost:5000/api/users/${editId}`)
-        .then((res) => {
-          const user = Array.isArray(res.data) ? res.data[0] : res.data;
-          setFormData({
-            name: user.name || "",
-            mobile: user.mobile || "",
-            age: user.age || "",
-            course: user.course || "",
-            address: user.address || "",
-            worktype: user.worktype ? user.worktype.split(",") : [],
-            status: String(user.status ?? "1"),
-            profile: null, 
-          });
-        })
-        .catch((err) => console.error(err));
+  // Handle file selection and open crop modal
+  const handleFileChange = async (index, e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const options = {
+        maxSizeMB: 1, // Max size in MB
+        minWidthOrHeight: 800,
+        maxWidthOrHeight: 800, // Resize to max 800px
+        useWebWorker: true, // Offload to web worker for better performance
+      };
+      try {
+        const compressedFile = await imageCompression(file, options);
+        const src = URL.createObjectURL(compressedFile);
+        console.log("Compressed image src:", src);
+        const newImages = [...images];
+        newImages[index] = { file: compressedFile, src, croppedAreaPixels: null };
+        setImages(newImages);
+        setCropModal({ show: true, index });
+      } catch (error) {
+        console.error("Compression error:", error);
+      }
     }
-  }, [editId]);
+  };
 
+  // Generate cropped image
+  const handleCropConfirm = async () => {
+    if (croppedAreaPixels && cropModal.index !== null) {
+      const image = new Image();
+      image.src = images[cropModal.index].src;
+      const canvas = document.createElement("canvas");
+      canvas.width = 500; // Fixed width
+      canvas.height = 500; // Fixed height
+      const ctx = canvas.getContext("2d");
+
+      image.onload = () => {
+        // Calculate the scale based on the original image size
+        const scaleX = image.naturalWidth / image.width;
+        const scaleY = image.naturalHeight / image.height;
+
+        // Draw the cropped and resized portion
+        ctx.drawImage(
+          image,
+          croppedAreaPixels.x * scaleX,
+          croppedAreaPixels.y * scaleY,
+          croppedAreaPixels.width * scaleX,
+          croppedAreaPixels.height * scaleY,
+          0,
+          0,
+          500,
+          500
+        );
+
+        canvas.toBlob((blob) => {
+          const newImages = [...images];
+          newImages[cropModal.index].croppedAreaPixels = croppedAreaPixels;
+          newImages[cropModal.index].file = blob;
+
+          const newFormImages = [...formData.images];
+          newFormImages[cropModal.index] = blob;
+
+          setImages(newImages);
+          setFormData({ ...formData, images: newFormImages });
+          setCropModal({ show: false, index: null });
+        }, "image/jpeg", 0.8); // Quality set to 80%
+      };
+    }
+  };
+
+  // TinyMCE change
+  const handleEditorChange = (field, content) => {
+    setFormData((prev) => ({ ...prev, [field]: content }));
+  };
+
+  const editorConfig = {
+    toolbar_mode: "sliding",
+    menubar: false,
+    height: 200,
+    plugins: [
+      "advlist", "autolink", "lists", "link", "charmap", "preview", "anchor", "searchreplace", "visualblocks", "code", "insertdatetime", "wordcount",
+    ],
+    toolbar:
+      "undo redo | blocks fontfamily fontsize | " +
+      "bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | " +
+      "bullist numlist outdent indent | link image media table | " +
+      "charmap | removeformat ",
+  };
+
+  // Form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const form = new FormData();
+    Object.entries(formData).forEach(([key, value]) => {
+      if (key === "metrics") {
+        // Convert metrics array to JSON string
+        form.append("metrics", JSON.stringify(value.map(m => m.value)));
+      } else if (key === "images") {
+        value.forEach((file, idx) => file && form.append("images", file));
+      } else {
+        form.append(key, value);
+      }
+    });
 
-     const form = new FormData();
-    form.append("name", formData.name);
-    form.append("mobile", formData.mobile);
-    form.append("age", formData.age);
-    form.append("course", formData.course);
-    form.append("address", formData.address);
-    form.append("status", formData.status);
-    formData.worktype.forEach((item) => form.append("worktype[]", item));
-    if (formData.profile) {
-      form.append("profile", formData.profile);
-    }
-    if (editId) {
-      form.append("id", editId);
-    }
-
-    console.log(formData);
+    if (editId) form.append("id", editId);
 
     try {
       if (!editId) {
-        const res = await axios.post("http://localhost:5000/api/users", formData);
-        navigate("/listuser", { state: { message: res.data.message } });
+        const res = await api.post("/products", form, {
+          headers: { "Content-Type": "multipart/form-data" },
+        });
+        toast.success(res.data.message || "Product created successfully!");
+        navigate("/admin/listproduct", { state: { message: res.data.message } });
       } else {
-        const res = await axios.patch("http://localhost:5000/api/users", formData);
-        navigate("/listuser", { state: { message: res.data.message } });
+        const res = await api.patch(`/products/${editId}`, form, {
+          headers: { "Content-Type": "multipart/form-data" },
+        });
+        toast.success(res.data.message || "Product updated successfully!");
+        navigate("/admin/listproduct", { state: { message: res.data.message } });
       }
-
     } catch (err) {
       console.error(err);
-      alert("Error submitting form");
+      toast.error(err?.response?.data?.message || "Error submitting form");
     }
   };
-const element = <h1>Hello, world!</h1>;
+
 
   return (
     <>
-    <AdminHeader page="Add Product" />
-    <form
-      className="card border-top border-0 border-4 border-primary"
-      onSubmit={handleSubmit}
-    >
-      <div className="card-body p-4">
-        <h5 className="mb-0 text-uppercase">{editId ? "Edit User" : "Add User"}</h5>
-        <hr />
+      <AdminHeader page="Add Product" />
+      <form className="card border-top border-0 border-4 border-primary" onSubmit={handleSubmit}>
+        <div className="card-body p-4">
+          <h5 className="mb-0 text-uppercase">{editId ? "Edit Product" : "Add Product"}</h5>
+          <hr />
+          <div className="row g-3">
+            {/* Category */}
+            <div className="col-4">
+              <label className="form-label">Select Category</label>
+              <select
+                className="form-select"
+                name="category"
+                value={formData.category}
+                onChange={handleInputChange}
+                required
+              >
+                <option value="">Select a Category</option>
+                {categories.map((cat, index) => (
+                  <option key={index} value={cat.category}>
+                    {cat.category}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-        <div className="row g-3">
-          {/* Name */}
-          <div className="col-md-6">
-            <label className="form-label">Name</label>
-            <input type="text" className="form-control" value={formData.name} onChange={handleChange} name="name" required />
-          </div>
-
-          <div className="col-md-6">
-            <label className="form-label">Mobile</label>
-            <input type="text" className="form-control" value={formData.mobile} onChange={handleChange} name="mobile" required />
-          </div>
-          
-          <div className="col-md-6">
-            <label className="form-label">Profile</label>
-            <input type="file" className="form-control" value={formData.profile} onChange={handleChange} name="profile" required />
-          </div>
-
-          {/* Age */}
-          <div className="col-md-6">
-            <label className="form-label">Age</label>
-            <input type="text" className="form-control" value={formData.age} onChange={handleChange} name="age" required />
-          </div>
-
-          {/* Course */}
-          <div className="col-6">
-            <label className="form-label">Select Course</label>
-            <select className="form-select" name="course" value={formData.course} onChange={handleChange} required>
-              <option value="">Select a course</option>
-              <option value="React">React</option>
-              <option value="Node.js">Node.js</option>
-              <option value="Python">Python</option>
-              <option value="Java">Java</option>
-            </select>
-          </div>
-
-          {/* Address */}
-          <div className="col-md-6">
-            <label className="form-label">Address</label>
-            <textarea className="form-control" name="address" value={formData.address} onChange={handleChange} />
-          </div>
-
-          {/* Work Type */}
-          <div className="col-6">
-            <label className="form-label width-100">Work Type</label>
-            <div>
-              <div className="form-check form-check-inline">
+            {/* Product info */}
+            {[
+              { name: "productname", label: "Product Name" },
+              { name: "url", label: "URL" },
+              { name: "sku", label: "SKU" },
+              { name: "mrp", label: "MRP" },
+              { name: "offerprice", label: "Offer Price" },
+            ].map((field, idx) => (
+              <div className="col-md-4" key={idx}>
+                <label className="form-label">{field.label}</label>
                 <input
-                  className="form-check-input"
-                  type="checkbox"
-                  name="worktype" id="worktype1"
-                  value="On-Site" onChange={handleChange} checked={formData.worktype?.includes("On-Site")}
+                  type="text"
+                  className="form-control"
+                  name={field.name}
+                  value={formData[field.name]}
+                  onChange={handleInputChange}
+                  required
                 />
-                <label className="form-check-label" htmlFor="worktype1">On-Site</label>
               </div>
-              <div className="form-check form-check-inline">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  name="worktype" id="worktype2"
-                  value="Remote" onChange={handleChange} checked={formData.worktype?.includes("Remote")}
+            ))}
+
+            {/* Metrics */}
+            <div className="col-md-4 mb-3">
+              <label className="form-label">Metrics</label>
+              {formData.metrics.map((metric) => (
+                <div className="d-flex align-items-center gap-2 mb-2" key={metric.id} ref={metric.id === 0 ? refMetric : null}>
+                  <input type="text" className="form-control" value={metric.value} onChange={(e) => handleMetricChange(metric.id, e)} required />
+                  {metric.id === 0 ? (
+                    <div className="btn-add" role="button" onClick={addMetric}>
+                      <FontAwesomeIcon icon={faAdd} />
+                    </div>
+                  ) : (
+                    <div className="btn-remove" role="button" onClick={() => removeMetric(metric.id)}>
+                      <FontAwesomeIcon icon={faTrash} />
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            {/* Images */}
+            {images.map((img, idx) => (
+              <div className="col-md-4" key={idx}>
+                <label className="form-label">Image {idx + 1}</label>
+                <input type="file" className="form-control" accept="image/*" onChange={(e) => handleFileChange(idx, e)} />
+                {img.croppedAreaPixels && img.file && (
+                  <img
+                    src={URL.createObjectURL(img.file)}
+                    alt={`Cropped Image ${idx + 1}`}
+                    style={{ width: "60px", height: "60px", objectFit: "cover", marginTop: "10px" }}
+                  />
+                )}
+              </div>
+            ))}
+
+            {/* TinyMCE editors */}
+            {[
+              { name: "description1", label: "Description 1" },
+              { name: "description2", label: "Description 2" },
+              { name: "detail", label: "Product Details" },
+              { name: "information", label: "Additional Information" },
+            ].map((field, idx) => (
+              <div className="col-md-12" key={idx}>
+                <label className="form-label">{field.label}</label>
+                <Editor
+                  apiKey={editorKey}
+                  init={editorConfig}
+                  value={formData[field.name]}
+                  onEditorChange={(c) => handleEditorChange(field.name, c)}
                 />
-                <label className="form-check-label" htmlFor="worktype2">Remote</label>
+              </div>
+            ))}
+
+            {/* Status */}
+            <div className="col-6">
+              <label className="form-label">Status</label>
+              <div>
+                {["1", "0"].map((val) => (
+                  <div className="form-check form-check-inline" key={val}>
+                    <input type="radio" className="form-check-input" name="status" value={val} onChange={handleInputChange} checked={formData.status === val} />
+                    <label className="form-check-label">{val === "1" ? "Active" : "Inactive"}</label>
+                  </div>
+                ))}
               </div>
             </div>
-          </div>
 
-          {/* Status */}
-          <div className="col-6">
-            <label className="form-label width-100">Status</label>
-            <div>
-              <div className="form-check form-check-inline">
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  name="status" id="status1"
-                  value="1" onChange={handleChange} checked={formData.status === "1"}
-                />
-                <label className="form-check-label" htmlFor="status1">Active</label>
-              </div>
-              <div className="form-check form-check-inline">
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  name="status" id="status2"
-                  value="0" onChange={handleChange} checked={formData.status === "0"}
-                />
-                <label className="form-check-label" htmlFor="status2">Inactive</label>
-              </div>
+            {/* Submit */}
+            <div className="col-12">
+              <button type="submit" className="btn btn-primary">Submit</button>
             </div>
-          </div>
-
-          {/* Submit */}
-          <div className="col-12">
-            <button type="submit" className="btn btn-primary">
-              Submit
-            </button>
           </div>
         </div>
-      </div>
-    </form>
+      </form>
+
+      {/* Crop Modal */}
+      <Modal show={cropModal.show} onHide={() => setCropModal({ show: false, index: null })} size="md" centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Crop Image</Modal.Title>
+        </Modal.Header>
+        <Modal.Body style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "498px", position: "relative" }}>
+          {cropModal.index !== null && images[cropModal.index].src && (
+            <Cropper
+              image={images[cropModal.index].src}
+              crop={crop}
+              zoom={zoom}
+              aspect={1}
+              onCropChange={setCrop}
+              onZoomChange={setZoom}
+              onCropComplete={(croppedArea, croppedAreaPixels) => setCroppedAreaPixels(croppedAreaPixels)}
+              style={{ containerStyle: { maxHeight: "498px", maxWidth: "498px", minHeight: "498px", minWidth: "498px" } }}
+            />
+          )}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setCropModal({ show: false, index: null })}>Cancel</Button>
+          <Button variant="primary" onClick={handleCropConfirm}>Crop</Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 }

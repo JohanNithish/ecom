@@ -136,6 +136,21 @@ p {
     gap: 0.5rem;
     width: 100%;;
 }
+.form-label{
+  font-weight: 500 !important;
+}
+.btn-add{
+  padding: 5px;
+  background: #00b30f;
+  color: #fff;
+  border-radius: 5px;
+}
+.btn-remove{
+  padding: 5px;
+  background: #e81f1f;
+  color: #fff;
+  border-radius: 5px;
+}
 .btn-action{
   padding: 5px;
   background: #6c7fd8;
