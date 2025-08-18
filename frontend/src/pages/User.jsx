@@ -12,10 +12,12 @@ import Error404 from './Error404';
 import Checkout from './Checkout';
 import Login from './Login';
 import Wishlist from './Wishlist';
-import Product from './Product';
+import ProductDetails from './ProductDetails';
 import About from './About';
 import Contact from './Contact';
 import Cart from './Cart';
+import Product from './Product';
+import ProductsProvider  from '../comp/ProductsContext';
 function User() {
   useEffect(() => {
   AOS.init({
@@ -31,19 +33,21 @@ function User() {
     <div className="website-wrap">
       
       <Header />
-
+<ProductsProvider>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="/product/*" element={<Product />} />
         <Route path="/register" element={<Register />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/login" element={<Login />} />
         <Route path="/wishlist" element={<Wishlist />} />
-        <Route path="/product" element={<Product />} />
+        <Route path="/productdetails/*" element={<ProductDetails />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<Error404 />} />
       </Routes>
+      </ProductsProvider>
      <Footer/>
      <BackToTop/>
     </div>

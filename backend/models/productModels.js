@@ -1,11 +1,24 @@
 const mongoose = require('mongoose');
 const { ObjectId } = mongoose.Schema;
-
+const priceSchema = new mongoose.Schema(
+  {
+    mrp: String,
+    offerprice: String,
+    stock: String,
+    metric: String, // Store only the value
+  },
+  { _id: false } // <-- disables _id for each object in the array
+);
 const productSchema = new mongoose.Schema({
   category: {
     type: String,
     required: true,
     ref: "category"
+  },
+  deal: {
+    type: String,
+    required: true,
+    ref: "deals"
   },
   productname: {
     type: String,
@@ -19,20 +32,10 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  mrp: {
-    type: Number,
-    required: true,
-  },
-  offerprice: {
-    type: Number,
-    required: true,
-  },
   images: [{
     type: String, // Store image paths or URLs
   }],
-  metrics: [{
-    value: String, // Store only the value
-  }],
+  price: [priceSchema],
   description1: {
     type: String,
     required: true,
@@ -47,6 +50,11 @@ const productSchema = new mongoose.Schema({
     type: String,
   },
   status: {
+    type: Number,
+    required: true,
+    default: 1, // 1 for active, 0 for inactive
+  },
+   isdeal: {
     type: Number,
     required: true,
     default: 1, // 1 for active, 0 for inactive

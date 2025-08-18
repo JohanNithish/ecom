@@ -7,26 +7,29 @@ exports.insertProduct = async (req, res, next) => {
     const imagePaths = req.files ? req.files.map(file => file.path) : [];
 
     // Transform metrics if sent as a comma-separated string or array of strings
-    let metrics = [];
-    if (req.body.metrics) {
-      const metricsData = Array.isArray(req.body.metrics) ? req.body.metrics : [req.body.metrics];
-      metrics = metricsData.map(value => ({ value: value.toString() }));
+    let price = [];
+     if (req.body.price) {
+      try {
+        price = JSON.parse(req.body.price); // ✅ parse JSON string sent from frontend
+      } catch (err) {
+        return res.status(400).json({ success: false, message: "Invalid price format" });
+      }
     }
 
     const productData = {
       category: req.body.category,
+      deal: req.body.deal,
       productname: req.body.productname,
       url: req.body.url,
       sku: req.body.sku,
-      mrp: parseFloat(req.body.mrp) || 0,
-      offerprice: parseFloat(req.body.offerprice) || 0,
       images: imagePaths,
-      metrics: metrics, // Use transformed metrics array
+      price, // Use transformed metrics array
       description1: req.body.description1,
       description2: req.body.description2,
       detail: req.body.detail,
       information: req.body.information,
       status: parseInt(req.body.status, 10) || 1,
+      isdeal: parseInt(req.body.isdeal, 10) || 0,
       createdBy: req.user ? req.user.id : null, // Set from authenticated user
       createdAt: new Date(),
     };
@@ -66,34 +69,76 @@ exports.getAllProduct = async (req, res, next) => {
   }
 };
 
+
+exports.getProduct = async (req, res, next) => {
+  try {
+    const userId = req.params.id;
+    const products = await productModel.findById(userId);
+    res.json({
+      success: true,
+      message: "Get Success",
+      data: products,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: "Get Failed",
+      error: error.message,
+    });
+  }
+};
+
+
+exports.getProductDetails = async (req, res, next) => {
+  try {
+    const url = req.params.url;
+    const products = await productModel.findOne({ url: url });
+    res.json({
+      success: true,
+      message: "Get Success",
+      data: products,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: "Get Failed",
+      error: error.message,
+    });
+  }
+};
+
+
 exports.putProduct = async (req, res, next) => {
   try {
     const { id } = req.params;
 
-    // Handle multiple image uploads for update
-    const imagePaths = req.files ? req.files.map(file => file.path) : undefined;
+    const imagePaths = req.files ? req.files.map(file => file.path) : [];
 
     // Transform metrics if sent as a comma-separated string or array of strings
-    let metrics = undefined;
-    if (req.body.metrics) {
-      const metricsData = Array.isArray(req.body.metrics) ? req.body.metrics : [req.body.metrics];
-      metrics = metricsData.map(value => ({ value: value.toString() }));
+    let price = [];
+     if (req.body.price) {
+      try {
+        price = JSON.parse(req.body.price); // ✅ parse JSON string sent from frontend
+      } catch (err) {
+        return res.status(400).json({ success: false, message: "Invalid price format" });
+      }
     }
-
     const updateData = {
       category: req.body.category,
+      deal: req.body.deal,
       productname: req.body.productname,
       url: req.body.url,
       sku: req.body.sku,
-      mrp: parseFloat(req.body.mrp),
-      offerprice: parseFloat(req.body.offerprice),
       images: imagePaths,
-      metrics: metrics,
+      price,
       description1: req.body.description1,
       description2: req.body.description2,
       detail: req.body.detail,
       information: req.body.information,
       status: parseInt(req.body.status, 10),
+      isdeal: parseInt(req.body.isdeal, 10),
       modifiedBy: req.user ? req.user.id : null,
       modifiedAt: new Date(),
     };

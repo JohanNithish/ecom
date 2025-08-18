@@ -3,17 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { Sidebar, Menu, MenuItem } from 'react-pro-sidebar';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faHome,
-  faRightFromBracket,
-  faBars,
-  faCircleChevronLeft,
-  faThList,
-  faGifts,
-  faBagShopping,
-  faShoppingBasket,
-  faUsers,
-  faShoppingCart
+import { faHome, faRightFromBracket, faBars, faCircleChevronLeft, faThList, faGifts, faBagShopping, faShoppingBasket, faUsers, faShoppingCart
 } from '@fortawesome/free-solid-svg-icons';
 export const SideBar = ({ isOpen, ToggleSidebar }) => {
   const navigate = useNavigate();

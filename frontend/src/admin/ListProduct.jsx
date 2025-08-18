@@ -4,12 +4,14 @@ import { toast } from 'react-toastify';
 import api from '../api/axios';
 import { DataGrid } from '@mui/x-data-grid';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
+import { faEdit, faTags, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { Link, useNavigate } from 'react-router-dom';
+import { Tooltip } from '@mui/material';
 
 const ListProduct = () => {
+  const navigate = useNavigate();
   const [products, setProducts] = useState([]);
-const ImgSrc = import.meta.env.VITE_IMG;
+  const ImgSrc = import.meta.env.VITE_IMG;
   // Fetch products
   const fetchProducts = useCallback(async () => {
     try {
@@ -53,11 +55,6 @@ const ImgSrc = import.meta.env.VITE_IMG;
     window.location.href = `/admin/addproduct?id=${id}`;
   }, []);
 
-  // Format currency
-  const formatCurrency = (value) =>
-    value != null
-      ? new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(value)
-      : '';
 
   // Columns
   const columns = useMemo(
@@ -70,38 +67,31 @@ const ImgSrc = import.meta.env.VITE_IMG;
         sortable: false,
         renderCell: (params) => {
           const images = params.row.images;
+          const dealIcon =
+            params.row.isdeal == 1 && (
+              <Tooltip title="It's a Deal" placement="top">
+              <FontAwesomeIcon icon={faTags} style={{ marginLeft: 8, color: "#6c7fd8" }} /></Tooltip>
+            ) ;
           if (images && images.length > 0) {
             // Replace backslashes with forward slashes for URL
             const firstImage = images[0].replace(/\\/g, '/');
-            return (
+            return (<>
               <img
-                src={`${ImgSrc+firstImage}`}
+                src={`${ImgSrc + firstImage}`}
                 alt="Product"
                 style={{ width: 50, height: 50, objectFit: 'cover', borderRadius: 4 }}
               />
-            );
+              {dealIcon}
+            </>);
           } else {
-            return <span>No Image</span>;
+            return <><span>No Image</span>{dealIcon}</>;
           }
         },
       },
       { field: 'productname', headerName: 'Product Name', flex: 1, minWidth: 150 },
       { field: 'category', headerName: 'Category', flex: 1, minWidth: 150 },
       { field: 'sku', headerName: 'SKU', flex: 1, minWidth: 120 },
-      {
-        field: 'mrp',
-        headerName: 'MRP',
-        flex: 1,
-        minWidth: 100,
-        renderCell: (params) => formatCurrency(params.row.mrp),
-      },
-      {
-        field: 'offerprice',
-        headerName: 'Offer Price',
-        flex: 1,
-        minWidth: 100,
-        renderCell: (params) => formatCurrency(params.row.offerprice),
-      },
+      { field: 'url', headerName: 'URL', flex: 1, minWidth: 120 },
       {
         field: 'actions',
         headerName: 'Actions',
@@ -111,7 +101,7 @@ const ImgSrc = import.meta.env.VITE_IMG;
         filterable: false,
         renderCell: (params) => (
           <div className="d-flex gap-2 align-items-center">
-            <div role="button" onClick={() => handleEditById(params.id)}>
+            <div role="button" onClick={() => navigate(`/admin/addproduct`, { state: { id: params.id.toString() } })}>
               <FontAwesomeIcon className="btn-action" icon={faEdit} />
             </div>
             <div role="button" onClick={() => handleDelete(params.id)}>
@@ -144,7 +134,7 @@ const ImgSrc = import.meta.env.VITE_IMG;
         </Link>
       </div>
 
-      <div style={{ height: 500, width: '100%' }}>
+      <div>
         <DataGrid
           rows={rows}
           columns={columns}

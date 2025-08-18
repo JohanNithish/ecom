@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectFade, Autoplay, Pagination } from 'swiper/modules';
 import 'swiper/css';
@@ -9,8 +9,13 @@ import 'swiper/css/pagination';
 import SwiperProduct from '../comp/SwiperProduct'
 import Title from '../comp/Title';
 import Breadcrumb from '../comp/Breadcrum';
+import { ProductsContext } from '../comp/ProductsContext';
+
+
 
 function Cart() {
+ const { products } = useContext(ProductsContext);
+
 const initialCart = [
   { id: 1, name: "Black Pepper Spice pack", price: 32, image: "/img/new-product/5.jpg", qty: 1 },
   { id: 2, name: "Small Cardamom Spice Pack", price: 41, image: "/img/new-product/6.jpg", qty: 1 },
@@ -251,7 +256,7 @@ const deals = [
                 }}
                 className="bb-deal-slider"
               >
-                {deals.map((item, index) => (
+                {products.map((item, index) => (
                   <SwiperSlide key={index}>
                     <SwiperProduct product={item} />
                   </SwiperSlide>

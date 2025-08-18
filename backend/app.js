@@ -3,7 +3,8 @@ const dotenv = require('dotenv');
 const path = require('path');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
-
+const { graphqlHTTP } = require("express-graphql");
+const schema = require("./graphql");
 const app = express();
 
 const connectDB = require('./config/connectDB');
@@ -24,6 +25,13 @@ const product = require('./routes/product');
 app.use('/api/v1/',master);
 app.use('/api/v1/',login);
 app.use('/api/v1/',product);
+app.use(
+  "/graphql",
+  graphqlHTTP({
+    schema,
+    graphiql: true, // GraphiQL playground enabled
+  })
+);
 
 
 app.listen(process.env.PORT, () => {

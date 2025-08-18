@@ -214,7 +214,12 @@ body {
     display: block;
     color: #686e7d;
   }
-
+.nav-link.active, .active{
+  color: #6c7fd8 !important;
+}
+.nav-item.bb-dropdown:has(.active) .bb-dropdown-item{
+color: #6c7fd8 !important;
+}
   .section-title {
     margin-bottom: 20px;
     padding-bottom: 20px;
@@ -1755,6 +1760,10 @@ display: none !important;
     .bb-header-btn:not(:last-child) {
       margin-left: 20px;
     }
+  }
+
+  .clr-theme{
+    color: #6c7fd8 !important;
   }
 
   @media only screen and (max-width: 991px) {

@@ -1,10 +1,10 @@
-import { NavLink } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 function ProductCard({ product, wishlist }) {
+  const ImgSrc = import.meta.env.VITE_IMG;
   return (
   <div
     className="col-xl-3 col-md-4 col-6 mb-24 bb-product-box"
-    style={{ animationDelay: '200ms' }}
   >
     <div className="bb-pro-box" data-aos="fade-up"
                         data-aos-duration="500" data-aos-once="true"
@@ -14,11 +14,11 @@ function ProductCard({ product, wishlist }) {
         <span className="bb-remove-wish">
           <a><i className="ri-close-circle-fill"></i></a>
         </span>
-        </div> : <span className="flags"><span>{product.flag}</span></span> } 
+        </div> : <span className="flags"><span>{product.deal}</span></span> } 
         
         <div className="inner-img">
-          <img className="main-img" alt={product.title} src={product.image} />
-          <img className="hover-img" alt={product.title} src={product.hoverImage} />
+          <img className="main-img" alt={product.productname} src={ImgSrc+product.images[0]} />
+          <img className="hover-img" alt={product.productname} src={ImgSrc+product.images[1]} />
         </div>
         <ul className="bb-pro-actions">
           <li className="bb-btn-group"><a title="Wishlist" href="/wishlist"><i className="ri-heart-line"></i></a></li>
@@ -29,21 +29,23 @@ function ProductCard({ product, wishlist }) {
       </div>
       <div className="bb-pro-contact">
         <div className="bb-pro-subtitle">
-          <a href="/shop">{product.category}</a>
+          <Link to={`/productdetails/`+product.url}>{product.category}</Link>
           <span className="bb-pro-rating">
-            {product.rating.map((star, i) => (
-              <i key={i} className={star ? 'ri-star-fill' : 'ri-star-line'}></i>
-            ))}
+            <i className="ri-star-fill"></i>
+              <i className="ri-star-fill"></i>
+              <i className="ri-star-fill"></i>
+              <i className="ri-star-fill"></i>
+              <i className="ri-star-line"></i>
           </span>
         </div>
-        <h4 className="bb-pro-title"><NavLink to="/product">{product.title}</NavLink></h4>
+        <h4 className="bb-pro-title"><Link to={`/productdetails/`+product.url}>{product.productname}</Link></h4>
         <div className="bb-price">
           <div className="inner-price">
-            <span className="new-price">{product.newPrice}</span>
-            {product.oldPrice && <span className="old-price">{product.oldPrice}</span>}
-            {product.outOfStock && <span className="item-left">Out Of Stock</span>}
+            <span className="new-price">{`₹`+product.price[0].offerprice}</span>
+              {product.price[0].mrp && <span className="old-price">{`₹`+product.price[0].mrp}</span>}
+              {product.price[0].stock <= 0 ? (<span className="item-left">Out Of Stock</span>) : product.price[0].stock <= 25 ? (<span className="item-left">{product.price[0].stock} Left</span>) : null }
           </div>
-          {product.weight && <span className="last-items">{product.weight}</span>}
+          <span className="last-items">{product.price[0].metric}</span>
         </div>
       </div>
     </div>
