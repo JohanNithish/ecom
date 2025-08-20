@@ -2858,12 +2858,16 @@ display: block;
     line-height: 10px;
   }
 
-  .bb-pro-box .bb-pro-img .bb-pro-actions .bb-btn-group:hover {
+  .bb-pro-box .bb-pro-img .bb-pro-actions .bb-btn-group:hover{
     background-color: #6c7fd8;
     border-color: #6c7fd8;
   }
+  .bb-pro-box .bb-pro-img .bb-pro-actions .bb-btn-group.active{
+    background-color: #ec1c1c;
+    border-color: #ec1c1c;
+  }
 
-  .bb-pro-box .bb-pro-img .bb-pro-actions .bb-btn-group:hover i {
+  .bb-pro-box .bb-pro-img .bb-pro-actions .bb-btn-group:hover i, .bb-pro-box .bb-pro-img .bb-pro-actions .bb-btn-group.active i {
     color: #fff;
   }
 

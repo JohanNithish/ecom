@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom"
+import WishlistAction from "./WishlistAction";
+import CartAction from "./CartAction";
 
-function ProductCard({ product, wishlist }) {
+function ProductCard({ product, wishlist, onRemove }) {
   const ImgSrc = import.meta.env.VITE_IMG;
   return (
   <div
@@ -11,7 +13,7 @@ function ProductCard({ product, wishlist }) {
                         data-aos-delay="600">
       <div className="bb-pro-img">
        {wishlist ? <div className="bb-wishlist">
-        <span className="bb-remove-wish">
+        <span className="bb-remove-wish" onClick={onRemove}>
           <a><i className="ri-close-circle-fill"></i></a>
         </span>
         </div> : <span className="flags"><span>{product.deal}</span></span> } 
@@ -20,12 +22,26 @@ function ProductCard({ product, wishlist }) {
           <img className="main-img" alt={product.productname} src={ImgSrc+product.images[0]} />
           <img className="hover-img" alt={product.productname} src={ImgSrc+product.images[1]} />
         </div>
-        <ul className="bb-pro-actions">
-          <li className="bb-btn-group"><a title="Wishlist" href="/wishlist"><i className="ri-heart-line"></i></a></li>
-          <li className="bb-btn-group"><a title="Quick View" href="#" data-bs-toggle="modal" data-bs-target="#bry_quickview_modal"><i className="ri-eye-line"></i></a></li>
-          <li className="bb-btn-group"><a title="Compare" href="/compare"><i className="ri-repeat-line"></i></a></li>
-          <li className="bb-btn-group"><a title="Add To Cart" href="/cart"><i className="ri-shopping-bag-4-line"></i></a></li>
-        </ul>
+         <ul className="bb-pro-actions">
+              <WishlistAction id={product.id} />
+              <li className="bb-btn-group">
+                <a
+                  data-link-action="quickview"
+                  title="Quick View"
+                  data-bs-toggle="modal"
+                  data-bs-target="#bry_quickview_modal"
+                >
+                  <i className="ri-eye-line"></i>
+                </a>
+              </li>
+              <CartAction product={product} weight={product.price[0].metric} quantity={1} />
+              <li className="bb-btn-group">
+                <Link to={`/productdetails/`+product.url} title="Details">
+                  <i className="ri-arrow-right-circle-line"></i>
+                </Link>
+              </li>
+            </ul>
+       
       </div>
       <div className="bb-pro-contact">
         <div className="bb-pro-subtitle">

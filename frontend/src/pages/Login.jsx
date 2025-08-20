@@ -1,50 +1,130 @@
+import { useState } from "react";
+import { useNavigate, NavLink } from "react-router-dom";
 import Breadcrumb from '../comp/Breadcrum';
-import { NavLink, useNavigate } from "react-router-dom";
 import Title from '../comp/Title';
+import api from "../api/useraxios";
+import { toast } from "react-toastify";
+
 const Login = () => {
+  const [formData, setFormData] = useState({
+    emailOrMobile: "",
+    password: ""
+  });
+
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await api.post(
+        "/userlogin",
+        formData,
+        { withCredentials: true } // send/receive cookies
+      );
+
+      toast.success("Login successful!");
+      localStorage.setItem("accessToken", res.data.accessToken); // save token
+
+      // --- Wishlist merge ---
+      const localWishlist = JSON.parse(sessionStorage.getItem("wishlist")) || [];
+      if (localWishlist.length > 0) {
+        try {
+          await api.post(
+            "/wishlist/merge",
+            { items: localWishlist },
+            {
+              headers: { Authorization: `Bearer ${res.data.accessToken}` },
+              withCredentials: true,
+            }
+          );
+          sessionStorage.removeItem("wishlist");
+        } catch (wishlistErr) {
+          console.error("Wishlist merge failed:", wishlistErr);
+          toast.error("Could not sync your wishlist.");
+        }
+      }
+
+      // --- Cart merge ---
+      const localCart = JSON.parse(sessionStorage.getItem("cart")) || [];
+      if (localCart.length > 0) {
+        try {
+          await api.post(
+            "/cart/merge",
+            { items: localCart }, // [{ productId, weight, quantity }]
+            {
+              withCredentials: true,
+            }
+          );
+          sessionStorage.removeItem("cart");
+        } catch (cartErr) {
+          console.error("Cart merge failed:", cartErr);
+          toast.error("Could not sync your cart.");
+        }
+      }
+
+      // ✅ Redirect
+      window.location.replace("/");
+    } catch (err) {
+      console.error(err);
+      if (err.response) {
+        toast.error(err.response.data.message || "Login failed");
+      } else {
+        toast.error("Network error, please try again.");
+      }
+    }
+  };
+
   return (
     <>
       <Breadcrumb page="Login" />
-
       <section className="section-login padding-tb-50">
         <div className="container">
           <div className="row">
 
             <div className="col-sm-12">
-              <Title main={"Log"} special={"In"} sub={"Best place to buy and sell digital products"} center={true}/>
+              <Title 
+                main={"Log"} 
+                special={"In"} 
+                sub={"Best place to buy and sell digital products"} 
+                center={true}
+              />
             </div>
 
             <div className="col-sm-12">
-              <div className="bb-login-contact" data-aos="fade-up"
-                        data-aos-duration="500" data-aos-once="true"
-                        data-aos-delay="500">
-                <form noValidate>
+              <div className="bb-login-contact">
+                <form onSubmit={handleSubmit}>
                   <div className="bb-login-wrap">
-                    <label htmlFor="email">Email*</label>
+                    <label>Email or Mobile*</label>
                     <div className="input-group">
                       <input
-                        placeholder="Enter Your Email"
+                        placeholder="Enter Your Email or Mobile"
                         required
-                        id="email"
                         className="form-control"
-                        type="email"
-                        name="email"
+                        type="text"
+                        name="emailOrMobile"
+                        value={formData.emailOrMobile}
+                        onChange={handleChange}
                       />
-                      <div className="invalid-feedback"></div>
                     </div>
                   </div>
 
                   <div className="bb-login-wrap">
-                    <label htmlFor="password">Password*</label>
+                    <label>Password*</label>
                     <div className="input-group">
                       <input
                         placeholder="Enter Your Password"
-                        id="password"
                         className="form-control"
                         type="password"
                         name="password"
+                        value={formData.password}
+                        onChange={handleChange}
                       />
-                      <div className="invalid-feedback"></div>
                     </div>
                   </div>
 

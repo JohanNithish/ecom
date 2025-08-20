@@ -1,7 +1,10 @@
 import { faPercentage, faTags } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useEffect, useReducer } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useEffect, useReducer } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { ProductsContext } from './ProductsContext';
+import { toast } from 'react-toastify';
+import api from '../api/useraxios';
 
 function reducer(state, action) {
   switch (action.type) {
@@ -19,6 +22,11 @@ function reducer(state, action) {
 }
 
 function ProductDetailsBox({ details }) {
+
+   const { user, cart, setCart } = useContext(ProductsContext);
+  const navigate = useNavigate();
+
+
   const initialState = {
     activeWeight: details?.price?.[0]?.metric || '',
     quantity: 1,
@@ -49,6 +57,62 @@ function ProductDetailsBox({ details }) {
   const totalMRP = mrpNum * state.quantity;
   const discount = totalMRP - totalOfferPrice;
   const offerPercent = totalMRP > 0 ? Math.round((discount / totalMRP) * 100) : 0;
+
+
+  const handleAddToCart = async () => {
+  if (!details) return;
+
+  const productId = details.id || details._id;
+  const weight = state.activeWeight;
+  const quantity = state.quantity;
+
+  // ---- Guest Cart ----
+  if (!user?.email) {
+    let localCart = JSON.parse(sessionStorage.getItem("cart")) || [];
+
+    // Look for existing item with same product + weight
+    const existingIndex = localCart.findIndex(
+      (item) => item.productId === productId && item.weight === weight
+    );
+
+    if (existingIndex > -1) {
+      // ✅ Update existing quantity
+      localCart[existingIndex].quantity += quantity;
+      toast.info("Cart updated (guest)");
+    } else {
+      // ✅ Always push flat object
+      localCart.push({ productId, weight, quantity });
+      toast.success("Added to cart (guest)");
+    }
+
+    sessionStorage.setItem("cart", JSON.stringify(localCart));
+    setCart(localCart);
+    navigate("/cart");
+    return;
+  }
+
+  // ---- User Cart ----
+  if (user.role !== "user") {
+    toast.error("Only users can add to cart!");
+    return;
+  }
+
+  try {
+    const res = await api.post(
+      "/cart",
+      { productId, weight, quantity }, // ✅ flat structure
+      { headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` } }
+    );
+
+    setCart(res.data.products || []);
+    toast.success("Added to cart!");
+    navigate("/cart");
+  } catch (err) {
+    console.error("Cart error:", err);
+    toast.error("Something went wrong!");
+  }
+};
+
 
   return (
     <div className="col-12 mb-24 col-lg-7">
@@ -126,7 +190,7 @@ function ProductDetailsBox({ details }) {
               </div>
 
               <div className="buttons">
-                <Link className="bb-btn-2" to="/cart">Add to Cart</Link>
+                <button className="bb-btn-2" onClick={handleAddToCart}> <i className="ri-shopping-bag-line"></i> Add to Cart</button>
               </div>
 
               <ul className="bb-pro-actions">

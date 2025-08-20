@@ -7,7 +7,7 @@ import Login from './Login';
 import Error404 from '../pages/Error404';
 import AddProduct from './AddProduct';
 import ListProduct from './ListProduct';
-import ProtectedRoute from './ProtectedRoute';
+import ProtectedRoute from '../api/ProtectedRoute';
 import Category from './Category';
 import Deals from './Deals';
 function AdminPage() {

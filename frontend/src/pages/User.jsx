@@ -32,8 +32,8 @@ function User() {
   return (
     <div className="website-wrap">
       
-      <Header />
 <ProductsProvider>
+      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />

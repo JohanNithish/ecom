@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
 import Breadcrumb from '../comp/Breadcrum';
+import { useNavigate } from "react-router-dom";
 import Title from '../comp/Title';
+import { toast } from 'react-toastify';
+import api from '../api/useraxios';
 
 const Register = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
     email: '',
     phoneNumber: '',
     password: '',
-    conformPassword: '',
+    confirmPassword: '',
     address: '',
     country: '',
     state: '',
@@ -25,11 +29,23 @@ const Register = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Form submitted:', formData);
-    // Add your form validation or API call here
-  };
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  if (formData.password !== formData.confirmPassword) {
+    toast.warning("Passwords do not match!");
+    return;
+  }
+
+  try {
+    const res = await api.post("/register", formData);
+    console.log("Success:", res.data);
+    toast.success("Registration successful!");
+    navigate("/login");
+  } catch (err) {
+    toast.error(err.response?.data?.message || "Registration failed");
+  }
+};
 
   return (
     <>
@@ -129,11 +145,11 @@ const Register = () => {
                       <div className="input-group">
                         <input
                           type="password"
-                          name="conformPassword"
+                          name="confirmPassword"
                           placeholder="Confirm your password"
                           required
                           className="form-control"
-                          value={formData.conformPassword}
+                          value={formData.confirmPassword}
                           onChange={handleChange}
                         />
                       </div>
@@ -185,11 +201,16 @@ const Register = () => {
                           onChange={handleChange}
                         >
                           <option value="" disabled>State</option>
-                          <option value="gujarat">Gujarat</option>
-                          <option value="goa">Goa</option>
-                          <option value="hariyana">Hariyana</option>
-                          <option value="mumbai">Mumbai</option>
-                          <option value="delhi">Delhi</option>
+                          <option value="Andhra Pradesh">Andhra Pradesh</option>
+                          <option value="Delhi">Delhi</option>
+                          <option value="Goa">Goa</option>
+                          <option value="Gujarat">Gujarat</option>
+                          <option value="Hariyana">Hariyana</option>
+                          <option value="Karnataka">Karnataka</option>
+                          <option value="Kerala">Kerala</option>
+                          <option value="Mumbai">Mumbai</option>
+                          <option value="Tamil Nadu">Tamil Nadu</option>
+                          
                         </select>
                       </div>
                     </div>
@@ -197,20 +218,15 @@ const Register = () => {
                     <div className="bb-register-wrap bb-register-width-50">
                       <label>City*</label>
                       <div className="input-group">
-                        <select
+                        <input
+                          type="text"
                           name="city"
+                          placeholder="City"
                           required
-                          className="custom-select form-select"
+                          className="form-control"
                           value={formData.city}
                           onChange={handleChange}
-                        >
-                          <option value="" disabled>City</option>
-                          <option value="surat">Surat</option>
-                          <option value="bhavnagar">Bhavnagar</option>
-                          <option value="amreli">Amreli</option>
-                          <option value="rajkot">Rajkot</option>
-                          <option value="amdavad">Amdavad</option>
-                        </select>
+                        />
                       </div>
                     </div>
 

@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import WishlistAction from "./WishlistAction";
+import CartAction from "./CartAction";
 
 const SwiperProduct = ({ product }) => {
   const ImgSrc = import.meta.env.VITE_IMG;
@@ -14,12 +16,27 @@ const SwiperProduct = ({ product }) => {
             <img className="main-img" alt="product" src={ImgSrc+product.images[0]} />
             <img className="hover-img" alt="hover" src={ImgSrc+product.images[1]} />
           </div>
+
           <ul className="bb-pro-actions">
-            <li className="bb-btn-group"><a title="Wishlist"><i className="ri-heart-line"></i></a></li>
-            <li className="bb-btn-group"><a data-link-action="quickview" title="Quick View" data-bs-toggle="modal" data-bs-target="#bry_quickview_modal"><i className="ri-eye-line"></i></a></li>
-            <li className="bb-btn-group"><a title="Compare"><i className="ri-repeat-line"></i></a></li>
-            <li className="bb-btn-group"><a title="Add To Cart"><i className="ri-shopping-bag-4-line"></i></a></li>
-          </ul>
+              <WishlistAction id={product.id} />
+              <li className="bb-btn-group">
+                <a
+                  data-link-action="quickview"
+                  title="Quick View"
+                  data-bs-toggle="modal"
+                  data-bs-target="#bry_quickview_modal"
+                >
+                  <i className="ri-eye-line"></i>
+                </a>
+              </li>
+              <CartAction product={product} weight={product.price[0].metric} quantity={1} />  
+              <li className="bb-btn-group">
+                <Link to={`/productdetails/`+product.url} title="Details">
+                  <i className="ri-arrow-right-circle-line"></i>
+                </Link>
+              </li>
+            </ul>
+
         </div>
 
         <div className="bb-pro-contact">

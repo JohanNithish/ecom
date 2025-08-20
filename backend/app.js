@@ -22,9 +22,15 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 const master = require('./routes/master');
 const login = require('./routes/login');
 const product = require('./routes/product');
+const register = require('./routes/register');
+const wishlist = require('./routes/wishlist');
+const cart = require('./routes/cart');
 app.use('/api/v1/',master);
 app.use('/api/v1/',login);
 app.use('/api/v1/',product);
+app.use('/api/v1/',register);
+app.use('/api/v1/',wishlist);
+app.use('/api/v1/',cart);
 app.use(
   "/graphql",
   graphqlHTTP({

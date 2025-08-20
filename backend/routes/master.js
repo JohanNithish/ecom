@@ -5,19 +5,19 @@ const router = express.Router();
 const { verifyToken } = require("../middleware/auth");
 
 router.route('/master')
-  .post(verifyToken, insertCategory)
-  .get(verifyToken, getAllCategory);
+  .post(verifyToken(["admin"]), insertCategory)
+  .get(getAllCategory);
 
 router.route('/master/:id')
-  .put(verifyToken, putCategory)
-  .delete(verifyToken, deleteCategory);
+  .put(verifyToken(["admin"]), putCategory)
+  .delete(verifyToken(["admin"]), deleteCategory);
 
 
   router.route('/dealmaster')
-  .post(verifyToken, insertDeal)
-  .get(verifyToken, getAllDeal);
+  .post(verifyToken(["admin"]), insertDeal)
+  .get(verifyToken(["admin"]), getAllDeal);
 
 router.route('/dealmaster/:id')
-  .put(verifyToken, putDeal)
-  .delete(verifyToken, deleteDeal);
+  .put(verifyToken(["admin"]), putDeal)
+  .delete(verifyToken(["admin"]), deleteDeal);
 module.exports = router;

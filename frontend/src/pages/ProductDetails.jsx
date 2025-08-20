@@ -13,7 +13,7 @@ import SwiperProduct from "../comp/SwiperProduct";
 import Title from "../comp/Title";
 import { ProductsContext } from '../comp/ProductsContext';
 import ProductDetailsBox from "../comp/ProductDetailsBox";
-import api from "../api/axios";
+import api from "../api/useraxios";
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 
@@ -189,7 +189,7 @@ const ImgSrc = import.meta.env.VITE_IMG;
               }}
               className="bb-deal-slider"
             >
-              {products.map((product) => (
+              {products.filter((p) => p.category === productDetails.category && p.url != productDetails.url).map((product) => (
                 <SwiperSlide key={product.id}>
                   <SwiperProduct product={product} />
                 </SwiperSlide>
