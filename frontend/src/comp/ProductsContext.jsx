@@ -62,14 +62,14 @@ function ProductsProvider({ children }) {
               role: decoded.role,
             });
           } else {
-            setUser({ id: "", username: "", email: "", role: "" });
+            setUser();
           }
         } catch (err) {
           console.error("Invalid token:", err);
-          setUser({ id: "", username: "", email: "", role: "" });
+          setUser();
         }
       } else {
-        setUser({ id: "", username: "", email: "", role: "" });
+        setUser();
       }
 
       // ✅ Fetch products

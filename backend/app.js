@@ -25,12 +25,14 @@ const product = require('./routes/product');
 const register = require('./routes/register');
 const wishlist = require('./routes/wishlist');
 const cart = require('./routes/cart');
+const checkout = require('./routes/checkout');
 app.use('/api/v1/',master);
 app.use('/api/v1/',login);
 app.use('/api/v1/',product);
 app.use('/api/v1/',register);
 app.use('/api/v1/',wishlist);
 app.use('/api/v1/',cart);
+app.use('/api/v1/',checkout);
 app.use(
   "/graphql",
   graphqlHTTP({

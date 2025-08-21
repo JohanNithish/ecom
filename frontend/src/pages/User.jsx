@@ -18,6 +18,7 @@ import Contact from './Contact';
 import Cart from './Cart';
 import Product from './Product';
 import ProductsProvider  from '../comp/ProductsContext';
+import OrdersPage from './OrdersPage';
 function User() {
   useEffect(() => {
   AOS.init({
@@ -41,6 +42,7 @@ function User() {
         <Route path="/register" element={<Register />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/orders" element={<OrdersPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/productdetails/*" element={<ProductDetails />} />

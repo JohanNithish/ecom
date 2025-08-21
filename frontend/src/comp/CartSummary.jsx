@@ -1,8 +1,9 @@
 import React, { useContext, useState } from "react";
 import { ProductsContext } from "../comp/ProductsContext";
 import { toast } from "react-toastify";
+import CheckoutList from "./CheckoutList";
 
-function CartSummary() {
+function CartSummary({isList}) {
   const { cart, products } = useContext(ProductsContext);
   const [coupon, setCoupon] = useState("");
   const [discount, setDiscount] = useState(0);
@@ -94,6 +95,10 @@ function CartSummary() {
             </div>
           </div>
         </div>
+        {isList &&
+        <div className="bb-checkout-sidebar">
+        <CheckoutList/>
+        </div>}
       </div>
     </div>
   );

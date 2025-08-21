@@ -114,51 +114,55 @@ function CartTable() {
           </thead>
           <tbody>
             {cartItems.length > 0 ? (
-              cartItems.map((item) => (
-                <tr key={item.cartId}>
-                  <td>
-                    <div className="Product-cart">
-                      <img
-                        src={ImgSrc + item.images[0]}
-                        alt={item.productname}
-                      />
-                      <span>{item.productname}</span>
-                    </div>
-                  </td>
-                  <td>₹{item.price[0].offerprice}</td>
-                  <td>
-                    <div className="qty-plus-minus">
-                      <div
-                        className="bb-qtybtn"
-                        onClick={() => decreaseQty(item.cartId)}
-                      >
-                        -
+              cartItems.map((item) => {
+                const priceObj = item.price.find(p => p.metric === item.weight) || item.price[0];
+                const offerPrice = Number(priceObj.offerprice || 0);
+                const totalPrice = (item.qty * offerPrice).toFixed(2);
+
+                return (
+                  <tr key={item.cartId}>
+                    <td>
+                      <div className="Product-cart">
+                        <img
+                          src={ImgSrc + item.images[0]}
+                          alt={item.productname}
+                        />
+                        <span>{item.productname} <small>({item.weight})</small></span>
                       </div>
-                      <input
-                        readOnly
-                        className="qty-input"
-                        value={item.qty}
-                      />
-                      <div
-                        className="bb-qtybtn"
-                        onClick={() => increaseQty(item.cartId)}
-                      >
-                        +
+                    </td>
+                    <td>₹{offerPrice}</td>
+                    <td>
+                      <div className="qty-plus-minus">
+                        <div
+                          className="bb-qtybtn"
+                          onClick={() => decreaseQty(item.cartId)}
+                        >
+                          -
+                        </div>
+                        <input
+                          readOnly
+                          className="qty-input"
+                          value={item.qty}
+                        />
+                        <div
+                          className="bb-qtybtn"
+                          onClick={() => increaseQty(item.cartId)}
+                        >
+                          +
+                        </div>
                       </div>
-                    </div>
-                  </td>
-                  <td>
-                    ₹{(item.qty * item.price[0].offerprice).toFixed(2)}
-                  </td>
-                  <td>
-                    <div className="pro-remove">
-                      <a onClick={() => removeItem(item.cartId)}>
-                        <i className="ri-delete-bin-line"></i>
-                      </a>
-                    </div>
-                  </td>
-                </tr>
-              ))
+                    </td>
+                    <td>₹{totalPrice}</td>
+                    <td>
+                      <div className="pro-remove">
+                        <a onClick={() => removeItem(item.cartId)}>
+                          <i className="ri-delete-bin-line"></i>
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })
             ) : (
               <tr>
                 <td colSpan="6" className="text-center">
@@ -171,7 +175,6 @@ function CartTable() {
       </div>
       <div>
         <Link className="bb-btn-2 check-btn" to="/checkout/"> 
-        
           Check Out <i className="ri-shopping-cart-fill ms-2"></i>
         </Link>
       </div>

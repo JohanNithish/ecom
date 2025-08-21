@@ -4398,6 +4398,8 @@ display: block;
   /* checkout */
   .bb-checkout-sidebar {
     margin-bottom: -24px;
+    padding-top: 15px;
+    border-top: 1px solid #e8e8e8;
   }
 
   .bb-checkout-sidebar .checkout-items {
@@ -4458,7 +4460,7 @@ display: block;
 
   .bb-checkout-sidebar .bb-checkout-pro .pro-items {
     padding: 15px;
-    background-color: #f5f5f5;
+    background-color: #fff;
     border: 1px solid #eee;
     border-radius: 20px;
     display: flex;
@@ -4507,7 +4509,6 @@ display: block;
   .bb-checkout-sidebar .bb-checkout-pro .pro-items .items-contact .inner-price .old-price {
     font-size: 14px;
     margin-left: 10px;
-    text-decoration: line-through;
     color: #777;
   }
 
@@ -4780,9 +4781,8 @@ display: block;
     height: 22px;
     margin: 2px;
     padding: 2px 8px;
-    cursor: pointer;
-    border: 1px solid #eee;
-    color: #777;
+    border: 1px solid #a1a1a1;
+    color: #6a6969;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -4792,11 +4792,10 @@ display: block;
     font-weight: 400;
   }
 
-  .bb-pro-variation ul li a {
+  .bb-pro-variation ul li .metric {
     font-size: 12px;
     line-height: 22px;
     font-weight: 400;
-    color: #777;
   }
 
   .bb-pro-variation ul li.active {
@@ -5276,7 +5275,7 @@ display: block;
     display: flex;
 }
 
-.bb-single-pro-contact .bb-single-qty .bb-pro-actions a {
+.bb-single-pro-contact .bb-single-qty .bb-pro-actions a, .bb-single-pro-contact .bb-single-qty .bb-pro-actions .whishlist{
     transition: all 0.3s ease;
     width: 40px;
     height: 40px;
@@ -5285,23 +5284,26 @@ display: block;
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    color: #fff;
-    background-color: #fff;
     border: 1px solid #eee;
     border-radius: 10px;
 }
 
-.bb-single-pro-contact .bb-single-qty .bb-pro-actions a i {
+.bb-single-pro-contact .bb-single-qty .bb-pro-actions a i, .bb-single-pro-contact .bb-single-qty .bb-pro-actions .whishlist i {
     transition: all 0.3s ease;
     font-size: 16px;
     color: #777;
     line-height: 10px;
 }
 
-.bb-single-pro-contact .bb-single-qty .bb-pro-actions a:hover {
+.bb-single-pro-contact .bb-single-qty .bb-pro-actions a:hover, .bb-single-pro-contact .bb-single-qty .bb-pro-actions .whishlist:hover {
     background-color: #6c7fd8;
 }
-
+.bb-single-pro-contact .bb-single-qty .bb-pro-actions .whishlist:hover i, .bb-single-pro-contact .bb-single-qty .bb-pro-actions .active .whishlist i{
+  color: #fff;
+}
+.bb-single-pro-contact .bb-single-qty .bb-pro-actions .active .whishlist{
+background: #ec1c1c !important;
+}
 .bb-single-pro-contact .bb-single-qty .bb-pro-actions a:hover i {
     color: #fff;
 }

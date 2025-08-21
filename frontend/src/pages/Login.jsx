@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate, NavLink } from "react-router-dom";
+import { useNavigate, NavLink, useLocation } from "react-router-dom";
 import Breadcrumb from '../comp/Breadcrum';
 import Title from '../comp/Title';
 import api from "../api/useraxios";
@@ -12,7 +12,8 @@ const Login = () => {
   });
 
   const navigate = useNavigate();
-
+  const location = useLocation();
+const from = location.state?.from?.pathname || "/";
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -69,7 +70,7 @@ const Login = () => {
       }
 
       // ✅ Redirect
-      window.location.replace("/");
+      window.location.replace(from);
     } catch (err) {
       console.error(err);
       if (err.response) {

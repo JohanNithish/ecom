@@ -147,3 +147,23 @@ exports.refreshAccessToken = (req, res) => {
     res.json({ accessToken });
   });
 };
+
+
+exports.getUser = async (req, res, next) => {
+  try {
+    const userId = req.params.id;
+    const user = await UserModel.findById(userId);
+    res.json({
+      success: true,
+      message: "Get Success",
+      data: user,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: "Get Failed",
+      error: error.message,
+    });
+  }
+};

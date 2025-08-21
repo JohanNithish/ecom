@@ -56,7 +56,7 @@ function WishlistAction({ id }) {
         role="button"
         onClick={handleWishlist}
       >
-        <div title="Wishlist">
+        <div className="whishlist" title="Wishlist">
           <i className="ri-heart-line"></i>
         </div>
       </li>

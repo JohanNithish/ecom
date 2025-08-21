@@ -198,12 +198,12 @@ function Header() {
                                                     </div>
                                                         <ul className="bb-dropdown-menu">
                                                             {user?.username ? (<>
-                                                                <li><Link to="/checkout" className="dropdown-item" >Checkout</Link>
+                                                                <li><Link to="/orders" className="dropdown-item" >My Orders</Link>
                                                                 </li>
                                                                 <li><a role="button" onClick={logout} className="dropdown-item" >Logout</a></li></>)
                                                                 : (<><li><Link to="/register" className="dropdown-item">Register</Link>
                                                                 </li>
-                                                                    <li><Link to="/checkout" className="dropdown-item" >Checkout</Link>
+                                                                    <li><Link to="/orders" className="dropdown-item" >My Orders</Link>
                                                                     </li>
                                                                     <li><Link to="/login" className="dropdown-item" >Login</Link></li></>)}
 
@@ -252,7 +252,7 @@ function Header() {
                                 <li><NavLink to="/">Home</NavLink></li>
                                 <li><NavLink to="/about">About Us</NavLink></li>
                                 <li><NavLink to="/cart">Cart</NavLink></li>
-                                <li><NavLink to="/checkout">Checkout</NavLink></li>
+                                <li><NavLink to="/orders">My Orders</NavLink></li>
 
 
                                 <li><span className="menu-toggle"></span><a role="button">Products</a>
@@ -300,7 +300,7 @@ function Header() {
                                                 <li className="nav-item"><NavLink to="/" className="nav-link">Home</NavLink></li>
                                                 <li className="nav-item"><NavLink to="/about" className="nav-link">About Us</NavLink></li>
                                                 <li className="nav-item"><NavLink to="/cart" className="nav-link">Cart</NavLink></li>
-                                                <li className="nav-item"><NavLink to="/checkout" className="nav-link">Checkout</NavLink></li>
+                                                <li className="nav-item"><NavLink to="/orders" className="nav-link">My Orders</NavLink></li>
 
 
                                                 <li className="nav-item bb-dropdown"><NavLink to="/product" className="nav-link bb-dropdown-item"
