@@ -251,8 +251,6 @@ function Header() {
                             <ul>
                                 <li><NavLink to="/">Home</NavLink></li>
                                 <li><NavLink to="/about">About Us</NavLink></li>
-                                <li><NavLink to="/cart">Cart</NavLink></li>
-                                <li><NavLink to="/orders">My Orders</NavLink></li>
 
 
                                 <li><span className="menu-toggle"></span><a role="button">Products</a>
@@ -262,6 +260,8 @@ function Header() {
                                         ))}
                                     </ul>
                                 </li>
+                                <li><NavLink to="/cart">Cart</NavLink></li>
+                                <li><NavLink to="/orders">My Orders</NavLink></li>
                                 <li><NavLink to="/login">Login</NavLink></li>
                                 <li><NavLink to="/contact">Contact Us</NavLink></li>
                             </ul>
@@ -299,8 +299,6 @@ function Header() {
                                             <ul className="navbar-nav">
                                                 <li className="nav-item"><NavLink to="/" className="nav-link">Home</NavLink></li>
                                                 <li className="nav-item"><NavLink to="/about" className="nav-link">About Us</NavLink></li>
-                                                <li className="nav-item"><NavLink to="/cart" className="nav-link">Cart</NavLink></li>
-                                                <li className="nav-item"><NavLink to="/orders" className="nav-link">My Orders</NavLink></li>
 
 
                                                 <li className="nav-item bb-dropdown"><NavLink to="/product" className="nav-link bb-dropdown-item"
@@ -311,6 +309,8 @@ function Header() {
                                                         ))}
                                                     </ul>
                                                 </li>
+                                                <li className="nav-item"><NavLink to="/cart" className="nav-link">Cart</NavLink></li>
+                                                <li className="nav-item"><NavLink to="/orders" className="nav-link">My Orders</NavLink></li>
                                                 <li className="nav-item"><NavLink className="nav-link" to="/contact"><svg
                                                     enableBackground="new 0 0 512 512" xmlns="http://www.w3.org/2000/svg"
                                                     version="1.1" x="0" y="0" viewBox="0 0 64 64">
