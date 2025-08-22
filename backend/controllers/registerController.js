@@ -167,3 +167,23 @@ exports.getUser = async (req, res, next) => {
     });
   }
 };
+
+
+// Get all users
+exports.getAllUsers = async (req, res, next) => {
+  try {
+    const users = await UserModel.find(); // fetch all users
+    res.json({
+      success: true,
+      message: "Users fetched successfully",
+      data: users,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch users",
+      error: error.message,
+    });
+  }
+};

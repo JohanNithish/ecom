@@ -24,6 +24,7 @@ const Checkout = () => {
         userDetails: {
           firstName: form.firstName,
           lastName: form.lastName,
+          phoneNumber: form.phoneNumber,
           address: form.address,
           postCode: form.postCode,
           country: form.country,
@@ -49,7 +50,7 @@ const Checkout = () => {
   };
   // Redirect if no cart or user
   useEffect(() => {
-    if (!cart || cart.length === 0) {
+    if (cart.length === 0) {
       toast.warning("Add at least one Product");
       navigate('/product');
       return;
@@ -63,6 +64,7 @@ const Checkout = () => {
   const [form, setForm] = useState({
     firstName: '',
     lastName: '',
+    phoneNumber: '',
     address: '',
     postCode: '',
     country: '',
@@ -83,6 +85,7 @@ const Checkout = () => {
             ...prev,
             firstName: u.firstName || '',
             lastName: u.lastName || '',
+            phoneNumber: u.phoneNumber || '',
             address: u.address || '',
             postCode: u.postCode || '',
             country: u.country || '',
@@ -124,12 +127,13 @@ const Checkout = () => {
                     <div className="row">
                       {/* Text Fields */}
                       {[
-                        { label: "First Name *", name: "firstName", placeholder: "Enter your First Name" },
-                        { label: "Last Name *", name: "lastName", placeholder: "Enter your Last Name" },
-                        { label: "Address *", name: "address", placeholder: "Address Line 1", full: true },
+                        { label: "First Name *", name: "firstName", placeholder: "Enter your First Name", readonly: true },
+                        { label: "Last Name *", name: "lastName", placeholder: "Enter your Last Name", readonly: true },
+                        { label: "Mobile *", name: "phoneNumber", placeholder: "Enter your Mobile Number" },
+                        { label: "Address *", name: "address", placeholder: "Address Line 1" },
                         { label: "Post Code *", name: "postCode", placeholder: "Post Code" },
                       ].map((field, i) => (
-                        <div key={i} className={`${field.full ? "col-sm-12" : "col-lg-6 col-sm-12"}`}>
+                        <div key={i} className="col-lg-6 col-sm-12">
                           <div className="input-item">
                             <label>{field.label}</label>
                             <div className="input-group">
@@ -139,6 +143,7 @@ const Checkout = () => {
                                 value={form[field.name] || ''}
                                 name={field.name}
                                 placeholder={field.placeholder}
+                                readOnly={field.readonly ? true : false}
                                 onChange={handleChange}
                                 required
                               />

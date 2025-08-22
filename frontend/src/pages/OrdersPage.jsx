@@ -52,7 +52,7 @@ const OrdersPage = () => {
                 <strong>Order ID:</strong> {order._id} &nbsp; | &nbsp;
                 <strong>Status:</strong> {order.status} &nbsp; | &nbsp;
                 <strong>Payment:</strong> {order.payment_method} &nbsp; | &nbsp;
-                <strong>Date:</strong> {new Date(order.createdAt).toLocaleString()}
+                <strong>Date:</strong> {new Date(order.createdAt).toLocaleDateString('en-GB')}
               </div>
               <div className="card-body">
                 <h5>Shipping Address:</h5>
@@ -75,19 +75,25 @@ const OrdersPage = () => {
                   <tbody>
                     {order.products.map((p, i) => (
                       <tr key={i}>
-                        <td>{p.name}</td>
+                        <td>{p.name} ({p.weight})</td>
                         <td>{p.quantity}</td>
-                        <td>${p.price}</td>
-                        <td>${p.price * p.quantity}</td>
+                        <td>₹{p.price}</td>
+                        <td>₹{p.price * p.quantity}</td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
 
-                <h5 className="text-end">
-                  Total Amount: $
-                  {order.products.reduce((sum, p) => sum + p.price * p.quantity, 0)}
-                </h5>
+                <p className="fw-bold text-end">
+                  Total Amount: ₹{order.products.reduce((sum, p) => sum + p.price * p.quantity, 0)}
+                </p>
+                <p className="fw-bold text-end">Delivery Charges: ₹22.2</p>
+                <p className="fw-bold text-end">GST: 5%</p>
+                <h6 className="text-end">
+                  Grand Total: ₹{(
+                    order.products.reduce((sum, p) => sum + p.price * p.quantity+22.2, 0) * 1.05
+                  ).toFixed(2)}
+                </h6>
               </div>
             </div>
           ))}

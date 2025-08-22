@@ -20,34 +20,27 @@ const userSchema = new mongoose.Schema({
   },
   phoneNumber: {
     type: String,
-    required: true,
     unique: true,
     trim: true
   },
   password: {
     type: String,
-    required: true,
     minlength: 6
   },
   address: {
     type: String,
-    required: true
   },
   country: {
     type: String,
-    required: true
   },
   state: {
     type: String,
-    required: true
   },
   city: {
     type: String,
-    required: true
   },
   postCode: {
     type: String,
-    required: true
   },
   createdAt: {
     type: Date,

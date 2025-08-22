@@ -181,11 +181,11 @@ const handleSubmit = async (e) => {
                           onChange={handleChange}
                         >
                           <option value="" disabled>Country</option>
-                          <option value="india">India</option>
-                          <option value="chile">Chile</option>
-                          <option value="egypt">Egypt</option>
-                          <option value="italy">Italy</option>
-                          <option value="yemen">Yemen</option>
+                          <option value="India">India</option>
+                          <option value="Chile">Chile</option>
+                          <option value="Egypt">Egypt</option>
+                          <option value="Italy">Italy</option>
+                          <option value="Yemen">Yemen</option>
                         </select>
                       </div>
                     </div>

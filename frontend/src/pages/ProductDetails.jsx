@@ -45,15 +45,24 @@ const ProductDetails = () => {
     arrows: false,
   };
 
-  const thumbSliderSettings = {
-    asNavFor: nav1,
-    ref: (slider) => setNav2(slider),
-    slidesToShow: 4,
-    swipeToSlide: true,
-    focusOnSelect: true,
-    arrows: true,
-    className: "single-nav-thumb",
-  };
+ const thumbSliderSettings = {
+  asNavFor: nav1,
+  ref: (slider) => setNav2(slider),
+  slidesToShow: 4,
+  swipeToSlide: true,
+  focusOnSelect: true,
+  arrows: true,
+  className: "single-nav-thumb",
+  responsive: [
+    {
+      breakpoint: 1000,
+      settings: {
+        slidesToShow: 2
+      }
+    }
+  ],
+};
+
   if (!productDetails) return <><Box
         display="flex"
         justifyContent="center"

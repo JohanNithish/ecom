@@ -10,6 +10,8 @@ import ListProduct from './ListProduct';
 import ProtectedRoute from '../api/ProtectedRoute';
 import Category from './Category';
 import Deals from './Deals';
+import ListUser from './ListUser';
+import ListOrder from './ListOrder';
 function AdminPage() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -40,6 +42,8 @@ const isLoginPage = location.pathname === "/admin/login";
               <Route path="/deals" element={<Deals />} />
               <Route path="/addproduct" element={<AddProduct />} />
               <Route path="/listproduct" element={<ListProduct />} />
+              <Route path="/listuser" element={<ListUser />} />
+              <Route path="/listorder" element={<ListOrder />} />
               <Route path="*" element={<Error404 />} />
             </Routes>
           </div>

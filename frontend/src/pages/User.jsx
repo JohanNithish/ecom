@@ -19,7 +19,10 @@ import Cart from './Cart';
 import Product from './Product';
 import ProductsProvider  from '../comp/ProductsContext';
 import OrdersPage from './OrdersPage';
+import { GoogleOAuthProvider } from '@react-oauth/google';
+
 function User() {
+  const googlekey = import.meta.env.VITE_GOOGLE;
   useEffect(() => {
   AOS.init({
     duration: 1000,
@@ -43,7 +46,14 @@ function User() {
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/orders" element={<OrdersPage />} />
-        <Route path="/login" element={<Login />} />
+        <Route
+        path="/login"
+        element={
+          <GoogleOAuthProvider clientId={googlekey}>
+            <Login />
+          </GoogleOAuthProvider>
+        }
+      />
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/productdetails/*" element={<ProductDetails />} />
         <Route path="/contact" element={<Contact />} />
