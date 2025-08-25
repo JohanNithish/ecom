@@ -7,6 +7,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import '../assets/css/hero.css';
 import Image from './Image';
+import { Link } from 'react-router-dom';
 
 function Banner({ categoryRef }) {
 
@@ -37,11 +38,11 @@ function Banner({ categoryRef }) {
                                     <div className="col-12 order-lg-1 order-2 mb-24 col-lg-6">
                                         <div className="hero-contact">
                                             <p>Flat 30% Off</p>
-                                            <h1>
-                                                Explore <span>Healthy</span>
-                                                <br /> &amp; Fresh Fruits
+                                             <h1>
+                                                Taste the <span>Freshness</span>
+                                                <br /> Pick the Best
                                             </h1>
-                                            <a className="bb-btn-1" href="shop-left-sidebar-col-3/index.html">Shop Now</a>
+                                            <Link className="bb-btn-1" to="/product/Fruits">Shop Now</Link>
                                         </div>
                                     </div>
                                     <div className="col-12 order-lg-2 order-1 mb-24 col-lg-6">
@@ -66,10 +67,10 @@ function Banner({ categoryRef }) {
                                         <div className="hero-contact">
                                             <p>Flat 20% Off</p>
                                             <h2>
-                                                Explore <span>Warm</span>
-                                                <br /> Fast Food &amp; Snacks
+                                                Farm <span>Fresh</span>
+                                                <br /> Eat Every Day
                                             </h2>
-                                            <a className="bb-btn-1" href="shop-left-sidebar-col-3/index.html">Shop Now</a>
+                                            <Link className="bb-btn-1" to="/product/Vegetable">Shop Now</Link>
                                         </div>
                                     </div>
                                     <div className="col-12 order-lg-2 order-1 mb-24 col-lg-6">
@@ -92,12 +93,12 @@ function Banner({ categoryRef }) {
                                 <div className="mb-minus-24 row">
                                     <div className="col-12 order-lg-1 order-2 mb-24 col-lg-6">
                                         <div className="hero-contact">
-                                            <p>Flat 30% Off</p>
+                                            <p>Flat 25% Off</p>
                                             <h2>
-                                                Explore <span>Organic</span>
-                                                <br /> &amp; Fresh Vegetables
+                                                Tasty <span>Treats</span>
+                                                <br /> With the Perfect Drink
                                             </h2>
-                                            <a className="bb-btn-1" href="shop-left-sidebar-col-3/index.html">Shop Now</a>
+                                            <Link className="bb-btn-1" to="/product/Juice">Shop Now</Link>
                                         </div>
                                     </div>
                                     <div className="col-12 order-lg-2 order-1 mb-24 col-lg-6">

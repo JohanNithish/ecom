@@ -9,21 +9,21 @@ function Testimonials() {
      const testimonials = [
     {
       image: 'img/testimonials/1.jpg',
-      name: 'Isabella Oliver',
-      role: 'Manager',
-      message: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto at sint eligendi possimus perspiciatis asperiores reiciendis hic amet alias aut quaerat maiores blanditiis.',
+      name: 'Praveen',
+      role: 'Customer',
+      message: 'This store has completely changed the way I shop. The products are always fresh, well-packed, and delivered right on time. I can truly trust the quality and consistency every single time.',
     },
     {
       image: 'img/testimonials/2.jpg',
-      name: 'Nikki Albart',
-      role: 'Team Leader',
-      message: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto at sint eligendi possimus perspiciatis asperiores reiciendis hic amet alias aut quaerat maiores blanditiis.',
+      name: 'Ana de Armas',
+      role: 'Vendor',
+      message: 'I love how easy it is to find what I need here. The website is clean, fast, and user-friendly, and the variety of products makes my shopping experience smooth and enjoyable.',
     },
     {
       image: 'img/testimonials/3.jpg',
-      name: 'Stephen Smith',
-      role: 'Co Founder',
-      message: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto at sint eligendi possimus perspiciatis asperiores reiciendis hic amet alias aut quaerat maiores blanditiis.',
+      name: 'Sujith',
+      role: 'Customer',
+      message: 'Every order feels like it’s been handled with care. From fresh fruits to quick snacks, everything tastes amazing and arrives in perfect condition. Highly recommend to everyone.',
     },
   ];
   return (

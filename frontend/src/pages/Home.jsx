@@ -64,7 +64,7 @@ function Home() {
   const vendors = [
     {
       id: 0,
-      name: 'Mira Fashion Pvt. Ltd.',
+      name: 'Mira Blue Pvt. Ltd.',
       sales: 587,
       categories: 'Fruits (5) | Vegetables (30) | Snacks (09)',
       mainImage: 'img/vendors/img-1.jpg',
@@ -72,7 +72,7 @@ function Home() {
     },
     {
       id: 1,
-      name: 'Eelna Fashion Pvt. Ltd.',
+      name: 'Eelna Pvt. Ltd.',
       sales: 428,
       categories: 'Fruits (8) | Vegetables (15) | Snacks (04)',
       mainImage: 'img/vendors/img-2.jpg',
@@ -80,7 +80,7 @@ function Home() {
     },
     {
       id: 2,
-      name: 'Mario Fashion Pvt. Ltd.',
+      name: 'Jain Versa Pvt. Ltd.',
       sales: 1024,
       categories: 'Fruits (16) | Vegetables (42) | Snacks (18)',
       mainImage: 'img/vendors/img-3.jpg',
@@ -88,7 +88,7 @@ function Home() {
     },
     {
       id: 3,
-      name: 'Maria Fashion Pvt. Ltd.',
+      name: 'Maria Rambo Pvt. Ltd.',
       sales: 210,
       categories: 'Fruits (2) | Vegetables (10) | Snacks (03)',
       mainImage: 'img/vendors/img-4.jpg',
@@ -154,9 +154,9 @@ function Home() {
                         </div>
                         <div className="category-sub-contact">
                           <h5>
-                            <a href="/shop-left-sidebar-col-3/">
+                            <div className="text-heading">
                               {category.title}
-                            </a>
+                            </div>
                           </h5>
                           <p>{category.items} items</p>
                         </div>
@@ -240,7 +240,7 @@ function Home() {
                       <img src="/img/banner/one.png" alt="one" />
                     </div>
                     <div className="inner-contact">
-                      <h5>Tasty Snack &amp; Fast food</h5>
+                      <h5>Tasty Snack &amp; Fast Juice</h5>
                       <p>The flavour of something special</p>
                       <a className="bb-btn-1" href="/shop-left-sidebar-col-3/">
                         Shop Now

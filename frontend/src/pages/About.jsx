@@ -78,28 +78,28 @@ const About = () => {
           <div className="col-12 col-lg-6 mb-24">
             <div className="bb-about-contact">
               
-              <Title main={"About the"} special={"BlueBerry"}  center={false}/>
+              <Title main={"About the"} special={"Green Cart"}  center={false}/>
 
               {/* Description */}
-              <div className="css-zvi4ix" style={{ animationDelay: "400ms" }}>
-                <div className="about-inner-contact">
+              <div>
+                <div className="about-inner-contact text-justify">
                   <h4>Farm-fresh Goodness, just a click Away.</h4>
                   <p>
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Reprehenderit, rem! Et obcaecati rem nulla, aut assumenda unde minima earum distinctio porro excepturi veritatis officiis dolorem quod. Sapiente amet rerum beatae dignissimos aperiam id quae quia velit. Ab optio doloribus hic quas sit corporis numquam.
+                    Green Cart brings you the finest selection of fresh, organic, and high-quality products right to your doorstep. We believe that healthy living starts with access to pure and natural food, which is why every item we deliver is handpicked for freshness and taste. From farm to home, our promise is simple — freshness, trust, and convenience with every order.
                   </p>
                   <p>
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Reprehenderit, rem! Et obcaecati rem nulla, aut assumenda unde minima earum distinctio porro excepturi veritatis officiis dolorem quod. Sapiente amet rerum beatae dignissimos aperiam id quae quia velit. Ab optio doloribus hic quas sit corporis numquam.
+                    Green Cart is more than just an online store; it’s your everyday companion for better living. Whether you’re shopping for fruits, vegetables, snacks, or beverages, we make sure you experience the joy of healthy and hassle-free shopping. With us, you get the perfect balance of quality, variety, and reliability — because your family deserves nothing less.
                   </p>
                 </div>
               </div>
 
               {/* Stats */}
-              <div className="css-zvi4ix" style={{ animationDelay: "600ms" }}>
+              <div>
                 <div className="row bb-vendor-rows mb-minus-24">
                   <div className="col-sm-4 mb-24">
                     <div className="bb-vendor-box">
                       <div className="bb-count">
-                        <h5 className="counter">200 +</h5>
+                        <h5 className="counter">275 +</h5>
                       </div>
                       <div className="inner-text">
                         <p>vendors</p>
@@ -109,7 +109,7 @@ const About = () => {
                   <div className="col-sm-4 mb-24">
                     <div className="bb-vendor-box">
                       <div className="bb-count">
-                        <h5 className="counter">654k +</h5>
+                        <h5 className="counter">1.5M +</h5>
                       </div>
                       <div className="inner-text">
                         <p>Sales</p>
@@ -119,7 +119,7 @@ const About = () => {
                   <div className="col-sm-4 mb-24">
                     <div className="bb-vendor-box">
                       <div className="bb-count">
-                        <h5 className="counter">587k +</h5>
+                        <h5 className="counter">754k +</h5>
                       </div>
                       <div className="inner-text">
                         <p>Customers</p>

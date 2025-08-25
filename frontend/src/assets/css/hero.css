@@ -57,7 +57,7 @@
   text-transform: uppercase;
 }
 .section-hero .bb-social-follow ul.inner-links li a:hover {
-  color: #6c7fd8;
+  color: #519d28;
 }
 .section-hero .bb-scroll-Page {
   position: absolute;
@@ -174,7 +174,7 @@
 }
 .hero-contact h1 span,
 .hero-contact h2 span {
-  color: #6c7fd8;
+  color: #519d28;
   position: relative;
 }
 .hero-contact h1 span:after,
@@ -215,7 +215,7 @@
   transition: all 0.3s ease 0s;
 }
 .hero-slider .swiper-pagination-bullet.swiper-pagination-bullet-active {
-  background-color: #6c7fd8;
+  background-color: #519d28;
   width: 30px;
 }
 
@@ -281,7 +281,7 @@
     transition: all 0.3s ease 0s;
   }
   .hero-slider .swiper-pagination-bullet.swiper-pagination-bullet-active {
-    background-color: #6c7fd8;
+    background-color: #519d28;
     width: 30px;
   }
 }
@@ -319,7 +319,7 @@
     transition: all 0.3s ease 0s;
   }
   .hero-slider .swiper-pagination-bullet.swiper-pagination-bullet-active {
-    background-color: #6c7fd8;
+    background-color: #519d28;
     width: 30px;
   }
 }
@@ -483,7 +483,7 @@
     transition: all 0.3s ease 0s;
   }
   .hero-slider .swiper-pagination-bullet.swiper-pagination-bullet-active {
-    background-color: #6c7fd8;
+    background-color: #519d28;
     width: 30px;
   }
 }
@@ -515,7 +515,7 @@
     transition: all 0.3s ease 0s;
   }
   .hero-slider .swiper-pagination-bullet.swiper-pagination-bullet-active {
-    background-color: #6c7fd8;
+    background-color: #519d28;
     width: 30px;
   }
-}
+} 
