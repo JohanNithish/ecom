@@ -24,9 +24,9 @@ width: 37px;
 :root {
     --bg--primary: hsl(225.99deg 80.24% 91.9%);
     --bg--active: hsla(203, 86%, 93%, 0.7);
-    --bg--hover: hsl(225.43deg 100% 91.78%);
+    --bg--hover: #f1fceb;
     --bg--focus: hsl(203, 100%, 100%);
-    --gray--primary: #c8d1ff;
+    --gray--primary: #def6d1;
     --gray--secondary: hsl(200, 14%, 30%);
 
     --dark--primary: hsl(203, 13%, 14%);
@@ -153,7 +153,7 @@ p {
 }
 .btn-action{
   padding: 5px;
-  background: #6c7fd8;
+  background: #519d28;
   color: #fff;
   font-size: 25px;
   border-radius: 5px;
@@ -262,7 +262,7 @@ p {
   fill: var(--gray--primary);
 }
 .sidebar__link:hover .icon *{
-  fill: #6c7fd8 !important;
+  fill: #519d28 !important;
 }
 .sidebar__item:hover .active .icon * {
   fill: #fff !important;
@@ -276,7 +276,7 @@ p {
 }
 
 .codepen-logo {
-width: 100px;
+width: 150px;
 margin-bottom: 12px;
 }
 
@@ -434,7 +434,7 @@ aside .sidebar__link:where(:hover, :focus-visible)[data-tooltip]::before {
     transition: all 350ms ease-out;
 }
 .sidebar__item .active .sidebar__link{
-    background-color: #6c7fd8;
+    background-color: #519d28;
 }
 .sidebar__item .active .icon svg{
     fill: #fff;

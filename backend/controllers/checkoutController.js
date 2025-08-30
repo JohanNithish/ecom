@@ -4,7 +4,7 @@ const Product = require('../models/productModels');
 const User = require('../models/registerModels'); // <-- import your user model
 
 exports.addcheckout = async (req, res) => {
-  const { userId, userDetails, payment_method } = req.body;
+  const { userId, userDetails, payment_method, payment_id  } = req.body;
 
   try {
     const cart = await Cart.findOne({ user: userId });
@@ -44,7 +44,8 @@ exports.addcheckout = async (req, res) => {
       userId,
       userDetails,
       products: orderProducts,
-      payment_method
+      payment_method,
+      payment_id: payment_id || null
     });
 
     await order.save();

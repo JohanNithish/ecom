@@ -55,12 +55,12 @@ function CartSummary({isList}) {
                   <span className="text-right">₹{subTotal.toFixed(2)}</span>
                 </li>
                 <li>
-                  <span className="text-left">Delivery Charges</span>
-                  <span className="text-right">₹{delivery.toFixed(2)}</span>
-                </li>
-                <li>
                   <span className="text-left">GST (5%)</span>
                   <span className="text-right">₹{gst.toFixed(2)}</span>
+                </li>
+                <li>
+                  <span className="text-left">Delivery Charges</span>
+                  <span className="text-right">₹{delivery.toFixed(2)}</span>
                 </li>
                 <li>
                   <span className="text-left">Coupon Discount</span>

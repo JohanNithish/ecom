@@ -9,6 +9,7 @@ import SideCart from "./SideCart";
 import api from "../api/useraxios";
 import { ProductsContext } from '../comp/ProductsContext';
 import { toast } from "react-toastify";
+import Search from "./Search";
 
 
 
@@ -117,22 +118,23 @@ function Header() {
                                     <div className="col-left-bar"><a href="#">Flat 50% Off On
                                         Grocery Shop.</a></div>
                                     <div className="col-right-bar">
-                                        <div className="cols"><a href="#">Help?</a></div>
-                                        <div className="cols"><a href="#">Track Order</a></div>
+                                        <div className="cols"><Link to="#" onClick={(e) => e.preventDefault()}>Help?</Link></div>
+                                        <div className="cols"><Link to="#" onClick={(e) => e.preventDefault()}>Track Order</Link></div>
                                         <div className="cols">
                                             <div className="custom-dropdown"><a className="bb-dropdown-toggle" href="#">Language</a>
                                                 <ul className="dropdown">
-                                                    <li><a href="#">English</a></li>
-                                                    <li><a href="#">Hindi</a></li>
-                                                    <li><a href="#">Gujarati</a></li>
+                                                    <li><Link to="#" onClick={(e) => e.preventDefault()}>English</Link></li>
+                                                    <li><Link to="#" onClick={(e) => e.preventDefault()}>Tamil</Link></li>
+                                                    <li><Link to="#" onClick={(e) => e.preventDefault()}>Hindi</Link></li>
                                                 </ul>
                                             </div>
                                         </div>
                                         <div className="cols">
-                                            <div className="custom-dropdown"><a className="bb-dropdown-toggle" href="#">Currency</a>
+                                            <div className="custom-dropdown"><Link className="bb-dropdown-toggle" to="#" onClick={(e) => e.preventDefault()}>Currency</Link>
                                                 <ul className="dropdown">
-                                                    <li><a href="#">USD $</a></li>
-                                                    <li><a href="#">EUR €</a></li>
+                                                    <li><Link to="#" onClick={(e) => e.preventDefault()}>INR ₹</Link></li>
+                                                    <li><Link to="#" onClick={(e) => e.preventDefault()}>USD $</Link></li>
+                                                    <li><Link to="#" onClick={(e) => e.preventDefault()}>EUR €</Link></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -159,25 +161,7 @@ function Header() {
                                     <div className="rev-row">
                                         <div className="cols">
                                             <div className="header-search">
-                                                <form className="bb-btn-group-form" action="#">
-                                                    <Dropdown
-                                                        overlay={<Menu onClick={handleSelect("item")} className="select-options bb-dropdown-location">
-                                                            <MenuItem key="Vegetables">Vegetables</MenuItem>
-                                                            <MenuItem key="Bakery">Bakery</MenuItem>
-                                                            <MenuItem key="Cold Drinks">Cold Drinks</MenuItem>
-                                                            <MenuItem key="Fruits">Fruits</MenuItem>
-                                                        </Menu>}
-                                                        trigger={['click']}
-                                                        animation="slide-up"
-                                                    >
-                                                        <div className="inner-select location-dark">
-                                                            <div className="custom-select">{state.item}<i style={{ fontSize: "30px" }}
-                                                                className="ri-arrow-drop-down-line"></i></div>
-                                                        </div></Dropdown>
-                                                    <input className="form-control bb-search-bar" placeholder="Search products..."
-                                                        type="text" /><button className="submit" type="submit"><i
-                                                            className="ri-search-line"></i></button>
-                                                </form>
+                                                <Search categories={categories} />
                                             </div>
                                         </div>
                                         <div className="cols bb-icons mob-stickey" ref={refs.mobHeader}>
@@ -203,8 +187,7 @@ function Header() {
                                                                 <li><a role="button" onClick={logout} className="dropdown-item" >Logout</a></li></>)
                                                                 : (<><li><Link to="/register" className="dropdown-item">Register</Link>
                                                                 </li>
-                                                                    <li><Link to="/orders" className="dropdown-item" >My Orders</Link>
-                                                                    </li>
+                                                                    
                                                                     <li><Link to="/login" className="dropdown-item" >Login</Link></li></>)}
 
                                                         </ul>
@@ -270,10 +253,10 @@ function Header() {
                             <div className="header-res-social">
                                 <div className="header-top-social">
                                     <ul className="mb-0">
-                                        <li className="list-inline-item"><a href="#"><i className="ri-facebook-fill"></i></a></li>
-                                        <li className="list-inline-item"><a href="#"><i className="ri-twitter-fill"></i></a></li>
-                                        <li className="list-inline-item"><a href="#"><i className="ri-instagram-line"></i></a></li>
-                                        <li className="list-inline-item"><a href="#"><i className="ri-linkedin-fill"></i></a></li>
+                                        <li className="list-inline-item"><Link to="#" onClick={(e) => e.preventDefault()}><i className="ri-facebook-fill"></i></Link></li>
+                                        <li className="list-inline-item"><Link to="#" onClick={(e) => e.preventDefault()}><i className="ri-twitter-fill"></i></Link></li>
+                                        <li className="list-inline-item"><Link to="#" onClick={(e) => e.preventDefault()}><i className="ri-instagram-line"></i></Link></li>
+                                        <li className="list-inline-item"><Link to="#" onClick={(e) => e.preventDefault()}><i className="ri-linkedin-fill"></i></Link></li>
                                     </ul>
                                 </div>
                             </div>
@@ -285,13 +268,13 @@ function Header() {
                         <div className="container">
                             <div className="row">
                                 <div className="col-12">
-                                    <div className="bb-inner-menu-desk"><a className="bb-header-btn bb-sidebar-toggle bb-category-toggle"
-                                        href="#"><svg className="svg-icon" viewBox="0 0 1024 1024" version="1.1"
+                                    <div className="bb-inner-menu-desk"><Link className="bb-header-btn bb-sidebar-toggle bb-category-toggle"
+                                        to="#" onClick={(e) => e.preventDefault()}><svg className="svg-icon" viewBox="0 0 1024 1024" version="1.1"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path
                                                 d="M384 928H192a96 96 0 0 1-96-96V640a96 96 0 0 1 96-96h192a96 96 0 0 1 96 96v192a96 96 0 0 1-96 96zM192 608a32 32 0 0 0-32 32v192a32 32 0 0 0 32 32h192a32 32 0 0 0 32-32V640a32 32 0 0 0-32-32H192zM784 928H640a96 96 0 0 1-96-96V640a96 96 0 0 1 96-96h192a96 96 0 0 1 96 96v144a32 32 0 0 1-64 0V640a32 32 0 0 0-32-32H640a32 32 0 0 0-32 32v192a32 32 0 0 0 32 32h144a32 32 0 0 1 0 64zM384 480H192a96 96 0 0 1-96-96V192a96 96 0 0 1 96-96h192a96 96 0 0 1 96 96v192a96 96 0 0 1-96 96zM192 160a32 32 0 0 0-32 32v192a32 32 0 0 0 32 32h192a32 32 0 0 0 32-32V192a32 32 0 0 0-32-32H192zM832 480H640a96 96 0 0 1-96-96V192a96 96 0 0 1 96-96h192a96 96 0 0 1 96 96v192a96 96 0 0 1-96 96zM640 160a32 32 0 0 0-32 32v192a32 32 0 0 0 32 32h192a32 32 0 0 0 32-32V192a32 32 0 0 0-32-32H640z">
                                             </path>
-                                        </svg></a><button className="navbar-toggler shadow-none" type="button"
+                                        </svg></Link><button className="navbar-toggler shadow-none" type="button"
                                             data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                                             aria-controls="navbarSupportedContent" aria-expanded="false"
                                             aria-label="Toggle navigation"><i className="ri-menu-2-line"></i></button>

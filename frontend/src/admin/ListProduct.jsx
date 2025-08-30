@@ -70,7 +70,7 @@ const ListProduct = () => {
           const dealIcon =
             params.row.isdeal == 1 && (
               <Tooltip title="It's a Deal" placement="top">
-              <FontAwesomeIcon icon={faTags} style={{ marginLeft: 8, color: "#6c7fd8" }} /></Tooltip>
+              <FontAwesomeIcon icon={faTags} style={{ marginLeft: 8, color: "#519d28" }} /></Tooltip>
             ) ;
           if (images && images.length > 0) {
             // Replace backslashes with forward slashes for URL
@@ -145,7 +145,7 @@ const ListProduct = () => {
           density="comfortable"
           sx={{
             '.MuiDataGrid-columnHeader': {
-              backgroundColor: '#6c7fd8',
+              backgroundColor: '#519d28',
               color: '#fff',
               fontWeight: '700',
             },

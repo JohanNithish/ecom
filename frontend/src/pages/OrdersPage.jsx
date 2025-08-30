@@ -87,11 +87,11 @@ const OrdersPage = () => {
                 <p className="fw-bold text-end">
                   Total Amount: ₹{order.products.reduce((sum, p) => sum + p.price * p.quantity, 0)}
                 </p>
-                <p className="fw-bold text-end">Delivery Charges: ₹22.2</p>
                 <p className="fw-bold text-end">GST: 5%</p>
+                <p className="fw-bold text-end">Delivery Charges: ₹22.2</p>
                 <h6 className="text-end">
                   Grand Total: ₹{(
-                    order.products.reduce((sum, p) => sum + p.price * p.quantity+22.2, 0) * 1.05
+                    order.products.reduce((sum, p) => sum + p.price * p.quantity, 0) * 1.05+22.2
                   ).toFixed(2)}
                 </h6>
               </div>

@@ -69,8 +69,8 @@ const About = () => {
         <div className="row mb-minus-24">
           {/* Left Column - Image */}
           <div className="col-12 col-lg-6 mb-24">
-            <div className="bb-about-img">
-              <img src="/img/one.png" alt="about-one" />
+            <div className="bb-about-img text-center">
+              <img src="/img/one.png" className="w-50" alt="about-one" />
             </div>
           </div>
 
@@ -96,7 +96,7 @@ const About = () => {
               {/* Stats */}
               <div>
                 <div className="row bb-vendor-rows mb-minus-24">
-                  <div className="col-sm-4 mb-24">
+                  <div className="col-sm-4">
                     <div className="bb-vendor-box">
                       <div className="bb-count">
                         <h5 className="counter">275 +</h5>
@@ -106,7 +106,7 @@ const About = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="col-sm-4 mb-24">
+                  <div className="col-sm-4">
                     <div className="bb-vendor-box">
                       <div className="bb-count">
                         <h5 className="counter">1.5M +</h5>
@@ -116,7 +116,7 @@ const About = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="col-sm-4 mb-24">
+                  <div className="col-sm-4">
                     <div className="bb-vendor-box">
                       <div className="bb-count">
                         <h5 className="counter">754k +</h5>

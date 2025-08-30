@@ -219,7 +219,7 @@ const Deals = () => {
                     density="comfortable"
                     sx={{
                         '.MuiDataGrid-columnHeader': {
-                            backgroundColor: '#6c7fd8',
+                            backgroundColor: '#519d28',
                             color: '#fff',
                             fontWeight: '700',
                         }

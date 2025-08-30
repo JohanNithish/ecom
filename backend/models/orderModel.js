@@ -27,7 +27,7 @@ const orderSchema = new mongoose.Schema({
 
   // Payment
   payment_method: { type: String, required: true },
-
+ payment_id: { type: String },
   // Status
   status: { type: String, default: 'Pending' }, // Pending, Completed, Cancelled
 

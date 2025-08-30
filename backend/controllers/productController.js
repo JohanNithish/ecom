@@ -201,3 +201,39 @@ exports.deleteProduct = async (req, res, next) => {
     });
   }
 };
+
+
+exports.searchProducts = async (req, res) => {
+  try {
+    const { category, q } = req.query; // category=All&q=phone
+
+    let filter = {};
+
+    if (category && category !== "All") {
+      filter.category = category;
+    }
+
+    if (q) {
+      // Search by product name or description1/description2
+      filter.$or = [
+        { productname: { $regex: q, $options: "i" } },
+      ];
+    }
+
+    // Only return productname and url
+    const products = await productModel.find(filter).select("productname url");
+
+    res.json({
+      success: true,
+      message: "Search Success",
+      data: products,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: "Search Failed",
+      error: error.message,
+    });
+  }
+};
