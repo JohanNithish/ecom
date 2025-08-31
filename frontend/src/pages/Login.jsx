@@ -92,9 +92,8 @@ const Login = () => {
       } else {
         toast.error("Network error, please try again.");
       }
-    } finally {
       setLoading(false);
-    }
+    } 
   };
 
   return (
@@ -153,7 +152,7 @@ const Login = () => {
                   <div className="bb-login-wrap text-center">
                     <button
                       type="submit"
-                      className="bb-btn-2 w-100 d-flex gap-3 align-items-center"
+                      className="bb-btn-2 w-100 d-flex gap-3 justify-content-center align-items-center"
                       disabled={loading}
 
                     >
@@ -171,6 +170,7 @@ const Login = () => {
                     <div className="d-flex justify-content-center mt-3">
                       <GoogleLogin
                         onSuccess={async (credentialResponse) => {
+                          setLoading(true);
                           try {
                             const res = await api.post(
                               "/oauth",
@@ -189,10 +189,12 @@ const Login = () => {
                           } catch (err) {
                             console.error("Google login error:", err);
                             toast.error("Google login failed");
+                            setLoading(false);
                           }
                         }}
                         onError={() => {
                           toast.error("Google login failed");
+                          setLoading(false);
                         }}
                         useOneTap={false}
                         auto_select={false}
