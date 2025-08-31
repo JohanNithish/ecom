@@ -5,6 +5,7 @@ import Title from '../comp/Title';
 import { toast } from 'react-toastify';
 import api from '../api/useraxios';
 import CircularProgress from '@mui/material/CircularProgress';
+import axios from 'axios';
 const Register = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -41,7 +42,7 @@ const Register = () => {
     setLoading(true);
 
     try {
-      const res = await api.post("/register", formData);
+      const res = await axios.post(`${import.meta.env.VITE_API_ADMIN}/register`, formData);
       console.log("Success:", res.data);
       toast.success("Registration successful!");
       navigate("/login");

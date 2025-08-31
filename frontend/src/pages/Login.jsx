@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock } from "@fortawesome/free-solid-svg-icons";
 import { GoogleLogin } from '@react-oauth/google';
 import CircularProgress from '@mui/material/CircularProgress';
+import axios from "axios";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -71,8 +72,8 @@ const Login = () => {
 
     setLoading(true);
     try {
-      const res = await api.post(
-        "/userlogin",
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_ADMIN}/userlogin`,
         formData,
         { withCredentials: true }
       );
