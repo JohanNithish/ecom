@@ -5,12 +5,14 @@ import { ProductsContext } from '../comp/ProductsContext';
 import api from '../api/useraxios';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const Checkout = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [discount, setDiscount] = useState(0);
-  const { user, cart, setCart, products} = useContext(ProductsContext);
+  const { user, cart, setCart, products } = useContext(ProductsContext);
+  const [loading, setLoading] = useState(false);
 
   const [form, setForm] = useState({
     firstName: '',
@@ -84,6 +86,8 @@ const Checkout = () => {
       return;
     }
 
+    setLoading(true);
+
     try {
       if (form.payment_method === "Cash on Delivery") {
         // COD → send order without payment_id
@@ -97,30 +101,30 @@ const Checkout = () => {
         }
 
         // Example order amount (cart total)
-const calculateTotalAmount = () => {
-  // Build cart items with product data
-  const cartItems = cart
-    .map((c) => {
-      const product = products.find(
-        (p) => p.id === c.productId || p._id === c.productId
-      );
-      return product ? { ...product, qty: c.quantity, weight: c.weight } : null;
-    })
-    .filter(Boolean);
+        const calculateTotalAmount = () => {
+          // Build cart items with product data
+          const cartItems = cart
+            .map((c) => {
+              const product = products.find(
+                (p) => p.id === c.productId || p._id === c.productId
+              );
+              return product ? { ...product, qty: c.quantity, weight: c.weight } : null;
+            })
+            .filter(Boolean);
 
-  // 🔹 Calculate subtotal (match correct weight price)
-  const subTotal = cartItems.reduce((acc, item) => {
-    const selectedPrice = item.price.find(p => p.metric === item.weight);
-    const offerPrice = selectedPrice ? selectedPrice.offerprice : 0;
-    return acc + (offerPrice * item.qty);
-  }, 0);
+          // 🔹 Calculate subtotal (match correct weight price)
+          const subTotal = cartItems.reduce((acc, item) => {
+            const selectedPrice = item.price.find(p => p.metric === item.weight);
+            const offerPrice = selectedPrice ? selectedPrice.offerprice : 0;
+            return acc + (offerPrice * item.qty);
+          }, 0);
 
-  const delivery = 22.2;
-  const gst = subTotal * 0.05; // ✅ 5% GST
-  return subTotal + delivery + gst - discount;
-};
+          const delivery = 22.2;
+          const gst = subTotal * 0.05; // ✅ 5% GST
+          return subTotal + delivery + gst - discount;
+        };
 
-const totalAmount = calculateTotalAmount();
+        const totalAmount = calculateTotalAmount();
 
         const options = {
           key: import.meta.env.VITE_RAZORPAY, // <-- replace with your key
@@ -148,6 +152,8 @@ const totalAmount = calculateTotalAmount();
     } catch (err) {
       console.error("Checkout failed:", err);
       toast.error("Checkout failed");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -308,7 +314,21 @@ const totalAmount = calculateTotalAmount();
 
                       <div className="col-sm-12">
                         <div className="input-button">
-                          <button type="submit" className="bb-btn-2">Place Order</button>
+                          <button
+                            type="submit"
+                            className="bb-btn-2 d-flex gap-3 align-items-center"
+                            disabled={loading}
+
+                          >
+                            {loading ? (
+                              <>
+                                <CircularProgress size={20} color="inherit" />
+                                Placing Order...
+                              </>
+                            ) : (
+                              "Place Order"
+                            )}
+                          </button>
                         </div>
                       </div>
 

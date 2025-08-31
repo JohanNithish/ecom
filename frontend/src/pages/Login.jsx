@@ -7,12 +7,14 @@ import { toast } from "react-toastify";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock } from "@fortawesome/free-solid-svg-icons";
 import { GoogleLogin } from '@react-oauth/google';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const Login = () => {
   const [formData, setFormData] = useState({
     emailOrMobile: "",
     password: ""
   });
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -67,6 +69,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    setLoading(true);
     try {
       const res = await api.post(
         "/userlogin",
@@ -89,6 +92,8 @@ const Login = () => {
       } else {
         toast.error("Network error, please try again.");
       }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -146,8 +151,20 @@ const Login = () => {
                   </div>
 
                   <div className="bb-login-wrap text-center">
-                    <button className="bb-btn-2 w-100" type="submit">
-                      <FontAwesomeIcon icon={faLock} /> Login
+                    <button
+                      type="submit"
+                      className="bb-btn-2 w-100 d-flex gap-3 align-items-center"
+                      disabled={loading}
+
+                    >
+                      {loading ? (
+                        <>
+                          <CircularProgress size={20} color="inherit" />
+                          Loggin...
+                        </>
+                      ) : (
+                        <> <FontAwesomeIcon icon={faLock} /> Login</>
+                      )}
                     </button>
 
                     {/* 🔹 Google OAuth */}
