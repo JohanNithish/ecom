@@ -152,7 +152,6 @@ const Checkout = () => {
     } catch (err) {
       console.error("Checkout failed:", err);
       toast.error("Checkout failed");
-    } finally {
       setLoading(false);
     }
   };
@@ -188,6 +187,7 @@ const Checkout = () => {
     } catch (err) {
       console.error("Order save failed:", err);
       toast.error("Order save failed");
+      setLoading(false);
     }
   };
 
